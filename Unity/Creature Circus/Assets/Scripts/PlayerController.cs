@@ -11,12 +11,13 @@ public class PlayerController : MonoBehaviour
     public float gravScale = -9.81f;
     public float gravMult;
     public float heldJumpLength;
-
+    
     private float upVel;
     private Vector2 inVel;
     private Vector3 targetVel;
     private bool doubleJump;
     private bool buttonHeld;
+    private float boost;
 
 
     //Input
@@ -39,13 +40,16 @@ public class PlayerController : MonoBehaviour
     {
         //Gets CharacterController which can use .SimpleMove
         controller = gameObject.GetComponent<CharacterController>();
+
+        //Set speed boost
+        boost = 1;
     }
 
     //Fixed update for physics regulation
     void FixedUpdate()
     {
         //Gets input and sets correct magnitude
-        inVel = movement.ReadValue<Vector2>() * playerSpeed * Time.deltaTime;
+        inVel = movement.ReadValue<Vector2>() * playerSpeed * Time.deltaTime * boost;
 
         // Debug the state of isGrounded
         Debug.Log("Is Grounded: " + controller.isGrounded);
@@ -93,12 +97,16 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator HeldJump()
     {
+        //Uses a timer to determine how long the player has been holding the jump button
         float timer = heldJumpLength;
         while (buttonHeld && timer > 0 && !controller.isGrounded)
         {
+            //Applies log momentum to the jump and small buff to speed
             upVel += Mathf.Log(timer + 1) * Time.deltaTime;
+            boost = 1.5f;
             timer -= Time.deltaTime;
             yield return null;
         }
+        boost = 1;
     }
 }
