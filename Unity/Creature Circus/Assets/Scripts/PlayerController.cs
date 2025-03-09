@@ -51,9 +51,6 @@ public class PlayerController : MonoBehaviour
         //Gets input and sets correct magnitude
         inVel = movement.ReadValue<Vector2>() * playerSpeed * Time.deltaTime * boost;
 
-        // Debug the state of isGrounded
-        Debug.Log("Is Grounded: " + controller.isGrounded);
-
         //Apply gravity
         if (!controller.isGrounded)
             upVel += gravScale * gravMult * Time.deltaTime;
@@ -108,5 +105,20 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         boost = 1;
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Gate1"))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Rhino");
+        }
+        else if (other.gameObject.CompareTag("Gate2"))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Monkey");
+        }
+        else if (other.gameObject.CompareTag("Gate3"))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Cheetah");
+        }
     }
 }
