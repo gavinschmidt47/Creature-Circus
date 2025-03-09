@@ -650,7 +650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 100
-  playerJump: 3
+  playerJump: 10
   heldJumpLength: 0.8
   maxSpeed: 40
   minSpeed: 8
