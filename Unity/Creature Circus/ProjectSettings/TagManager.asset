@@ -8,6 +8,7 @@ TagManager:
   - Gate2
   - Gate3
   - Ground
+  - Climbable
   layers:
   - Default
   - TransparentFX
