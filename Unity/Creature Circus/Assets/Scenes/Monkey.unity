@@ -275,12 +275,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1.467081}
-  m_Center: {x: 0, y: 0, z: -0.23354039}
+  m_Size: {x: 1, y: 1.0008101, z: 1.0618653}
+  m_Center: {x: 0, y: 0.00040489782, z: -0.030932058}
 --- !u!23 &159594271
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -397,14 +397,14 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5000001
+  m_Radius: 0.58155555
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0.00000005276615, y: 0, z: 0.08155536}
 --- !u!23 &689307038
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -629,12 +629,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1.4901677}
-  m_Center: {x: 0, y: 0, z: 0.24508381}
+  m_Size: {x: 1, y: 1, z: 1.0751805}
+  m_Center: {x: 0, y: 0, z: 0.03758994}
 --- !u!23 &1420009093
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -864,7 +864,7 @@ MonoBehaviour:
   playerJump: 0.5
   gravScale: -5
   gravMult: 0.2
-  heldJumpLength: 2
+  heldJumpLength: 1
   inputs: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &1762526334
 MonoBehaviour:

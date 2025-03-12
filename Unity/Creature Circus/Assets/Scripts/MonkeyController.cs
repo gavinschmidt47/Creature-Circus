@@ -10,15 +10,18 @@ public class MonkeyController : MonoBehaviour
     public float UpwardSpeed = 3.3f;
    public GameObject monkey;
 
+   float timePassed = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
+
+          timePassed += Time.deltaTime;
         
         if(Input.GetKey("w") & TouchingWall == true)     
         {
@@ -28,8 +31,12 @@ public class MonkeyController : MonoBehaviour
 
         if(Input.GetKeyUp("w"))
         {
-            GetComponent<Rigidbody>().isKinematic = false;
-            TouchingWall = false;
+            GetComponent<Rigidbody>().isKinematic = true;
+        }
+
+        if(Input.GetKeyUp("space"))
+        {
+            GetComponent<PlayerController>().enabled = true;
         }
     }
 
@@ -38,16 +45,16 @@ public class MonkeyController : MonoBehaviour
         {
             TouchingWall = true;
             GetComponent<PlayerController>().enabled = false;
-            Debug.Log("IAJFA");
+            Debug.Log("hit collision");
         }
     }
 
     private void OnTriggerExit(Collider other) {
         if (other.gameObject.CompareTag("Climbable"))
         {
+            timePassed = 0f;
             TouchingWall = false;
             GetComponent<PlayerController>().enabled = true;
-
             Debug.Log("left collision");
         }
     }
