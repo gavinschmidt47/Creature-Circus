@@ -361,7 +361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ca650f6670d4e21990e3b74e2f1f57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  climb: 2
 --- !u!1 &689307036
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,7 +484,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ca650f6670d4e21990e3b74e2f1f57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  climb: 2
 --- !u!1 &989059316
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,7 +713,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ca650f6670d4e21990e3b74e2f1f57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  climb: 2
 --- !u!1 &1636846285
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,6 +912,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1762526333}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1762526343}
+        m_TargetAssemblyTypeName: MonkeyController, Assembly-CSharp
         m_MethodName: Jump
         m_Mode: 0
         m_Arguments:
@@ -1140,11 +1149,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3549ba6ba9844c3b9670b06570dc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  open: 100
-  range: 1
-  TouchingWall: 0
-  UpwardSpeed: 3.3
-  monkey: {fileID: 1762526332}
+  controller: {fileID: 1762526335}
+  playerController: {fileID: 1762526333}
+  climbSpeed: 3
+  jumpForce: 10
 --- !u!1 &1801041685
 GameObject:
   m_ObjectHideFlags: 0

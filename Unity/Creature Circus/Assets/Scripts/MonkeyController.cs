@@ -1,62 +1,85 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MonkeyController : MonoBehaviour
 {
-    public float open = 100f;
-    public float range = 1f;
-    public bool TouchingWall = false;
-    public float UpwardSpeed = 3.3f;
-   public GameObject monkey;
+    public CharacterController controller;
+    public PlayerController playerController;
+    public float climbSpeed = 3.0f;
+    public float jumpForce = 10.0f;
 
-   float timePassed = 0f;
+    private bool isClimbing = false;
+    private Vector3 wallLocation;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
     void Update()
     {
-
-          timePassed += Time.deltaTime;
-        
-        if(Input.GetKey("w") & TouchingWall == true)     
+        if (isClimbing)
         {
-            transform.position += Vector3.up * Time.deltaTime * UpwardSpeed;
-            GetComponent<Rigidbody>().isKinematic = true;
+            //Disables player movement
+            playerController.enabled = false;
+
+            //Climbs the wall
+            Climb();
+
+            //Checks for jump input
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //Moves the character away from the wall
+                StartCoroutine(JumpAway(transform.position - wallLocation));
+            }
         }
-
-        if(Input.GetKeyUp("w"))
+        else
         {
-            GetComponent<Rigidbody>().isKinematic = true;
-        }
-
-        if(Input.GetKeyUp("space"))
-        {
-            GetComponent<PlayerController>().enabled = true;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("Climbable"))
-        {
-            TouchingWall = true;
-            GetComponent<PlayerController>().enabled = false;
-            Debug.Log("hit collision");
+            //Re-enables player movement
+            playerController.enabled = true;
         }
     }
 
-    private void OnTriggerExit(Collider other) {
-        if (other.gameObject.CompareTag("Climbable"))
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Climbable"))
         {
-            timePassed = 0f;
-            TouchingWall = false;
-            GetComponent<PlayerController>().enabled = true;
-            Debug.Log("left collision");
+            //Sets the wall location and starts climbing
+            wallLocation = other.transform.position;
+            isClimbing = true;
         }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Climbable"))
+        {
+            //Moves the character up from the wall
+            StartCoroutine(JumpAway(Vector3.zero));
+        }
+    }
+
+    //Called in update while climbing
+    void Climb()
+    {
+        //Moves characterm up the wall
+        controller.Move(Vector3.up * climbSpeed * Time.deltaTime);
+    }
+
+    IEnumerator JumpAway(Vector3 wallDirection)
+    {
+        //Need to neutralize sideways movement
+        //Finds direction to move away from wall
+        Vector3 jumpDirection = (wallDirection.normalized * jumpForce / 4) + transform.up;
+
+        //Moves the character in a jump arc
+        float jumpTime = 0.0f;
+        while (jumpTime < 0.3f)
+        {
+            controller.Move(jumpDirection * jumpForce * Time.deltaTime);
+            jumpTime += Time.deltaTime;
+            yield return null;
+        }
+
+        //Resets climbing
+        isClimbing = false;
     }
 }
 

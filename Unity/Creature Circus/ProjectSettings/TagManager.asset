@@ -9,6 +9,7 @@ TagManager:
   - Gate3
   - Ground
   - Climbable
+  - Breakable
   layers:
   - Default
   - TransparentFX
