@@ -33,22 +33,23 @@ public class MonkeyController : MonoBehaviour
         }
     }
 
-     private void OnCollisionEnter(Collision other) {
+    private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Climbable"))
         {
             TouchingWall = true;
             GetComponent<PlayerController>().enabled = false;
             Debug.Log("IAJFA");
         }
-}
+    }
 
- private void OnCollisionExit(Collision other) {
+    private void OnTriggerExit(Collider other) {
         if (other.gameObject.CompareTag("Climbable"))
         {
             TouchingWall = false;
-        GetComponent<PlayerController>().enabled = true;
+            GetComponent<PlayerController>().enabled = true;
+
+            Debug.Log("left collision");
         }
     }
-
 }
 
