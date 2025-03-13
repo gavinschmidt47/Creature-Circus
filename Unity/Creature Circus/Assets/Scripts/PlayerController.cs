@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float gravScale = -9.81f;
     public float gravMult;
     public float heldJumpLength;
+    public GameObject attackBox;
     
     private float upVel;
     private Vector2 inVel;
@@ -120,5 +121,19 @@ public class PlayerController : MonoBehaviour
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Cheetah");
         }
+    }
+
+    //Called from PlayerInput
+    public void Attack(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        StartCoroutine(inAttack(attackBox));
+    }
+
+    private IEnumerator inAttack(GameObject box)
+    {
+        box.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        box.SetActive(false);
     }
 }
