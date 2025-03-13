@@ -122,4 +122,13 @@ public class RhinoController : MonoBehaviour
         //Reset charging
         charging = false;
     }
+
+    private void OnTriggerEnter(Collider other) {
+        Debug.Log("Collided" + charging);
+        if (other.gameObject.CompareTag("Breakable") && charging)
+        {
+            Debug.Log("Destroyed");
+            Destroy(other.gameObject);
+        }
+    }
 }

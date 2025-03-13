@@ -12,6 +12,7 @@ public class CheetahController : MonoBehaviour
     public float maxSpeed;
     public float minSpeed;
     public float breakForce;
+    public GameObject attackBox;
     
     private Vector2 inVel;
     private bool doubleJump;
@@ -163,5 +164,19 @@ public class CheetahController : MonoBehaviour
         {
             grounded = false;
         }
+    }
+
+    //Called from PlayerInput
+    public void Attack(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        StartCoroutine(inAttack(attackBox));
+    }
+
+    private IEnumerator inAttack(GameObject box)
+    {
+        box.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        box.SetActive(false);
     }
 }

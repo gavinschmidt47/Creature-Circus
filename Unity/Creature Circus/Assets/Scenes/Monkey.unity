@@ -252,7 +252,6 @@ GameObject:
   - component: {fileID: 159594272}
   - component: {fileID: 159594271}
   - component: {fileID: 159594270}
-  - component: {fileID: 159594274}
   m_Layer: 0
   m_Name: Cube (5)
   m_TagString: Climbable
@@ -349,18 +348,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &159594274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159594269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67ca650f6670d4e21990e3b74e2f1f57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &689307036
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +360,6 @@ GameObject:
   - component: {fileID: 689307039}
   - component: {fileID: 689307038}
   - component: {fileID: 689307037}
-  - component: {fileID: 689307041}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Climbable
@@ -472,18 +458,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &689307041
+--- !u!1 &974439890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 974439892}
+  - component: {fileID: 974439891}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &974439891
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 689307036}
+  m_GameObject: {fileID: 974439890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67ca650f6670d4e21990e3b74e2f1f57, type: 3}
+  m_Script: {fileID: 11500000, guid: 46299efeb4871f44b8f921179fe59779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &974439892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974439890}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.8666048, y: 0.7925659, z: 41.51887}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989059316
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,7 +622,6 @@ GameObject:
   - component: {fileID: 1420009094}
   - component: {fileID: 1420009093}
   - component: {fileID: 1420009092}
-  - component: {fileID: 1420009096}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Climbable
@@ -701,18 +718,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1420009096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420009091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67ca650f6670d4e21990e3b74e2f1f57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1636846285
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,6 +867,7 @@ MonoBehaviour:
   gravScale: -5
   gravMult: 0.2
   heldJumpLength: 1
+  attackBox: {fileID: 0}
   inputs: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &1762526334
 MonoBehaviour:
@@ -1519,3 +1525,4 @@ SceneRoots:
   - {fileID: 1636846289}
   - {fileID: 689307040}
   - {fileID: 1762526339}
+  - {fileID: 974439892}
