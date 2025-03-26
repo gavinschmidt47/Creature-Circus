@@ -6,11 +6,18 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     //PlayerStats
+    [Header("Player Stats")]
+    [Tooltip("Speed of the player")]
     public float playerSpeed;
+    [Tooltip("Jump height of the player")]
     public float playerJump;
+    [Tooltip("Amount of gravity applied to the player")]
     public float gravScale = -9.81f;
+    [Tooltip("Multiplier for gravity")]
     public float gravMult;
+    [Tooltip("How long the player can hold the jump button")]
     public float heldJumpLength;
+    [Tooltip("Melee hitbox collider")]
     public GameObject attackBox;
     
     private float upVel;
@@ -22,9 +29,11 @@ public class PlayerController : MonoBehaviour
 
 
     //Input
+    [Header("No Touchy <3")]
     public InputActionAsset inputs;
     
     private InputAction movement;
+    private InputAction look;
 
     
     //Controller
@@ -35,6 +44,8 @@ public class PlayerController : MonoBehaviour
         //Takes input from Move input action and activates listener
         movement = inputs.FindAction("Move");
         movement.Enable();
+        look = inputs.FindAction("Look");
+        look.Enable();
     }
 
     void Start()
@@ -44,20 +55,30 @@ public class PlayerController : MonoBehaviour
 
         //Set speed boost
         boost = 1;
+
+        //Locks cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    void Update()
+    {
+        //Look around
+        Vector2 lookDir = look.ReadValue<Vector2>();
+        transform.Rotate(0, lookDir.x, 0);
     }
 
     //Fixed update for physics regulation
     void FixedUpdate()
     {
-        //Gets input and sets correct magnitude
         inVel = movement.ReadValue<Vector2>() * playerSpeed * Time.deltaTime * boost;
-
         //Apply gravity
         if (!controller.isGrounded)
             upVel += gravScale * gravMult * Time.deltaTime;
 
         //Convert to Vector3 for SimpleMove
-        targetVel = new Vector3(inVel.x, upVel, inVel.y);
+        Vector3 move = transform.right * inVel.x + transform.forward * inVel.y;
+        targetVel = new Vector3(move.x, upVel, move.z);
 
         //Apply input
         controller.Move(targetVel);

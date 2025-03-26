@@ -6,19 +6,38 @@ using UnityEngine.UI;
 public class RhinoController : MonoBehaviour
 {
     //UI
+    [Header("UI")]
+    [Tooltip("Stamina Slider")]
     public Slider chargeBar;
+    [Tooltip("Color of stamina bar when player can charge (insert monocolor image)(size does not matter)")]
+    public Image chargeColor;
+    [Tooltip("Color of stamina bar when charge is cooling down (insert monocolor image)(size does not matter)")]
+    public Image cooldownColor;
 
 
     //Settings
+    [Header("Charging Settings")]
+    [Tooltip("Boost added to speed when charging")]
     public float chargeSpeed = 10.0f;
-    public float chargeTime = 2.0f;
-    public float chargeCooldown = 5.0f;
+    [Tooltip("Max time can charge in seconds")]
+    public float chargeMax = 2.5f;
+    [Tooltip("How fast the charge depletes (1 = 1 second)")]
+    public float chargeDeplete = 1f;
+    [Tooltip("How much charge comes back each second after use")]
+    public float chargeRate = 5.0f;
 
+    private float charge;
     private bool charging = false;
-    private float chargingTime = 0.0f;
-    private float coolingTime;
     private bool inCooling = false;
-    private Image chargeColor;
+    private Image chargeColorUI;
+
+
+    //Camera
+    [Header("Camera Settings")]
+    [Tooltip("Normal follow camera object")]
+    public GameObject followCam;
+    [Tooltip("Camera object for charging")]
+    public GameObject chargeCam;
 
 
     //Controller
@@ -34,69 +53,52 @@ public class RhinoController : MonoBehaviour
         playerController = gameObject.GetComponent<PlayerController>();
 
         //Sets the UI
-        chargeBar.maxValue = chargeCooldown;
-        coolingTime = chargeCooldown;
-        chargeBar.value = coolingTime;
-        chargeColor = chargeBar.fillRect.GetComponent<Image>();
+        chargeBar.maxValue = chargeMax;
+        charge = chargeMax;
+        chargeBar.value = charge;
+        chargeColorUI = chargeBar.fillRect.GetComponent<Image>();
     }
 
     void Update()
     {
         //Cooldown
-        if (coolingTime < chargeCooldown)
+        if (charge < chargeMax && inCooling)
         {
-            coolingTime += Time.deltaTime;
-            inCooling = true;
+            charge += Time.deltaTime * chargeRate;
+            chargeBar.value = charge;
         }
-        else
+        else if (charge >= chargeMax && inCooling)
         {
             inCooling = false;
-            coolingTime = chargeCooldown;
-            chargeBar.maxValue = chargeTime;
-            chargeBar.value = chargeTime;
+            charge = chargeMax;
+            chargeBar.value = chargeMax;
+            chargeColorUI.color = chargeColor.color;
         }
-
-
-        //UI
-        if (!inCooling)
+        else if (charge <= 0 && !inCooling)
         {
-            chargeBar.maxValue = chargeTime;
-            chargeBar.value = chargeTime - chargingTime;
-
-            //Change chargeBar's Child Fill's color to green
-            chargeColor.color = Color.blue;
-        }
-        else
-        {
-            chargeBar.maxValue = chargeCooldown;
-            chargeBar.value = coolingTime;
-
-            // Change chargeBar's Child Fill's color to grey
-            chargeColor.color = Color.grey;
+            inCooling = true;
+            chargeColor.color = cooldownColor.color;
         }
     }
 
     //Called from PlayerInput
     public void ChargeButton (InputAction.CallbackContext context)
     {
-        if (context.started && coolingTime >= chargeCooldown)
+        if (context.started && !inCooling)
         {
-            Debug.Log("Charging");
             //Starts the charge
             charging = true;
             StartCoroutine(Charge());
+            followCam.SetActive(false);
+            chargeCam.SetActive(true);
         }
         else if (context.canceled)
         {
             //Stops the charge
             charging = false;
-            Debug.Log("Stopped Charging");
-            if (chargingTime >= chargeTime) 
-                coolingTime = 0.0f;
-            else
-                coolingTime = chargeCooldown;
-
-            chargingTime = 0.0f;
+            StopCoroutine(Charge());
+            followCam.SetActive(true);
+            chargeCam.SetActive(false);
         }
         else return;
     }
@@ -106,15 +108,17 @@ public class RhinoController : MonoBehaviour
         //Disable playercontrols
         playerController.enabled = false;
 
-        chargingTime = 0.0f;
-        Debug.Log($"Charging: {charging}, ChargingTime: {chargingTime}, ChargeTime: {chargeTime}");
-        while (charging && chargingTime < chargeTime)
+        while (charging && charge > 0)
         {
             //Charge for chargeTime
             controller.Move(transform.forward * chargeSpeed * Time.deltaTime);
-            chargingTime += Time.deltaTime;
+            charge -= Time.deltaTime * chargeDeplete;
+            chargeBar.value = charge;
             yield return null;
         }
+
+        followCam.SetActive(true);
+        chargeCam.SetActive(false);
 
         //Re-enable playercontrols  
         playerController.enabled = true;
@@ -123,11 +127,10 @@ public class RhinoController : MonoBehaviour
         charging = false;
     }
 
-    private void OnTriggerEnter(Collider other) {
-        Debug.Log("Collided" + charging);
+    private void OnControllerColliderHit(ControllerColliderHit other) {
+        Debug.Log("Collision with " + other.gameObject.name);
         if (other.gameObject.CompareTag("Breakable") && charging)
         {
-            Debug.Log("Destroyed");
             Destroy(other.gameObject);
         }
     }
