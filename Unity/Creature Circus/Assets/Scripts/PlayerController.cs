@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
     private InputAction movement;
     private InputAction look;
 
+// Animator
+public Animator myAnimator;
     
     //Controller
     private CharacterController controller;
@@ -76,6 +78,7 @@ public class PlayerController : MonoBehaviour
         infStam = false;
         paused = false;
         gameOver = false;
+
     }
 
     void Update()
@@ -83,6 +86,7 @@ public class PlayerController : MonoBehaviour
         //Look around
         Vector2 lookDir = look.ReadValue<Vector2>();
         transform.Rotate(0, lookDir.x, 0);
+
     }
 
     //Fixed update for physics regulation
@@ -99,6 +103,29 @@ public class PlayerController : MonoBehaviour
 
         //Apply input
         controller.Move(targetVel);
+
+    // Check to see if moving, trigger movement animation
+        if (move.x > 0.001f || move.z > 0.001f)
+        {
+            myAnimator.SetTrigger("Move");
+            Debug.Log("Moving");
+        }
+        else
+        {
+            myAnimator.ResetTrigger("Move");
+            Debug.Log("Not Moving");
+        }
+
+        if (upVel > 0.001f)
+        {
+            myAnimator.SetTrigger("Jump");
+            Debug.Log("Jumping");
+        }
+        else
+        {
+            myAnimator.ResetTrigger("Jump");
+            Debug.Log("Not Jumping");
+        }
     }
 
     //Called from Player Input
