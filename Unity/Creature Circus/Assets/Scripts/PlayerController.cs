@@ -26,7 +26,11 @@ public class PlayerController : MonoBehaviour
     private bool doubleJump;
     private bool buttonHeld;
     private float boost;
-
+    internal bool invincible;
+    internal bool infStam;
+    internal bool paused;
+    internal bool gameOver;
+    
 
     //Input
     [Header("No Touchy <3")]
@@ -38,6 +42,7 @@ public class PlayerController : MonoBehaviour
     
     //Controller
     private CharacterController controller;
+    private GameController gameController;
 
     void OnEnable()
     {
@@ -52,6 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         //Gets CharacterController which can use .SimpleMove
         controller = gameObject.GetComponent<CharacterController>();
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
 
         //Set speed boost
         boost = 1;
@@ -59,6 +65,17 @@ public class PlayerController : MonoBehaviour
         //Locks cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        //Set default values
+        upVel = 0;
+        inVel = Vector2.zero;
+        targetVel = Vector3.zero;
+        doubleJump = false;
+        buttonHeld = false;
+        invincible = false;
+        infStam = false;
+        paused = false;
+        gameOver = false;
     }
 
     void Update()
@@ -129,18 +146,27 @@ public class PlayerController : MonoBehaviour
         boost = 1;
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("Gate1"))
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.CompareTag("Gate1"))
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Rhino");
         }
-        else if (other.gameObject.CompareTag("Gate2"))
+        else if (hit.gameObject.CompareTag("Gate2"))
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Monkey");
         }
-        else if (other.gameObject.CompareTag("Gate3"))
+        else if (hit.gameObject.CompareTag("Gate3"))
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Cheetah");
+        }
+        else if (hit.gameObject.CompareTag("Win"))
+        {
+            gameController.WinGame();
+        }
+        else if (hit.gameObject.CompareTag("Enemy") && !invincible)
+        {
+            gameController.LoseGame();
         }
     }
 
@@ -156,5 +182,31 @@ public class PlayerController : MonoBehaviour
         box.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         box.SetActive(false);
+    }
+
+    //Called from Unity Events
+    public void InfStamina(bool inf)
+    {
+        Debug.Log("InfStamina method called with value: " + inf); // Debug log to confirm method call
+        if (inf)
+        {
+            infStam = true;
+        }
+        else
+        {
+            infStam = false;
+        }
+        Debug.Log("Infinite Stamina set to: " + infStam);
+    }
+    public void Invincible(bool inv)
+    {
+        if (inv)
+        {
+            invincible = true;
+        }
+        else
+        {
+            invincible = false;
+        }
     }
 }

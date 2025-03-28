@@ -44,6 +44,9 @@ public class RhinoController : MonoBehaviour
     private PlayerController playerController;
     private CharacterController controller;
 
+    //Misc.
+    private Coroutine chargeCoroutine;
+
     void Start()
     {
         //Gets CharacterController which can use .SimpleMove
@@ -79,6 +82,16 @@ public class RhinoController : MonoBehaviour
             inCooling = true;
             chargeColor.color = cooldownColor.color;
         }
+        
+        if (playerController.paused || playerController.gameOver)
+        {
+            //If the game is paused, stop charging
+            charging = false;
+            if (chargeCoroutine != null)
+                StopCoroutine(chargeCoroutine);
+            followCam.SetActive(true);
+            chargeCam.SetActive(false);
+        }
     }
 
     //Called from PlayerInput
@@ -88,7 +101,7 @@ public class RhinoController : MonoBehaviour
         {
             //Starts the charge
             charging = true;
-            StartCoroutine(Charge());
+            chargeCoroutine = StartCoroutine(Charge());
             followCam.SetActive(false);
             chargeCam.SetActive(true);
         }
@@ -96,9 +109,12 @@ public class RhinoController : MonoBehaviour
         {
             //Stops the charge
             charging = false;
-            StopCoroutine(Charge());
+            StopCoroutine(chargeCoroutine);
             followCam.SetActive(true);
             chargeCam.SetActive(false);
+
+            playerController.enabled = true;
+            charging = false;
         }
         else return;
     }
@@ -108,12 +124,15 @@ public class RhinoController : MonoBehaviour
         //Disable playercontrols
         playerController.enabled = false;
 
-        while (charging && charge > 0)
+        while ((charging && charge > 0) || playerController.infStam)
         {
             //Charge for chargeTime
             controller.Move(transform.forward * chargeSpeed * Time.deltaTime);
-            charge -= Time.deltaTime * chargeDeplete;
-            chargeBar.value = charge;
+            if (!playerController.infStam)
+            {
+                charge -= Time.deltaTime * chargeDeplete;
+                chargeBar.value = charge;
+            }
             yield return null;
         }
 
@@ -128,10 +147,32 @@ public class RhinoController : MonoBehaviour
     }
 
     private void OnControllerColliderHit(ControllerColliderHit other) {
-        Debug.Log("Collision with " + other.gameObject.name);
         if (other.gameObject.CompareTag("Breakable") && charging)
         {
             Destroy(other.gameObject);
+        }
+    }
+
+    public void ChargeBarInfinite(bool on)
+    {
+        if (on)
+        {
+            charge = chargeMax;
+            chargeBar.value = chargeMax;
+            StartCoroutine(PingPongChargeBarColor());
+        }
+        else
+        {
+            StopCoroutine(PingPongChargeBarColor());
+        }
+    }
+
+    private IEnumerator PingPongChargeBarColor()
+    {
+        while (true)
+        {
+            chargeColorUI.color = Color.Lerp(Color.white, Color.yellow, Mathf.PingPong(Time.time, 1));
+            yield return null;
         }
     }
 }
