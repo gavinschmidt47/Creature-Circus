@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
                 pausePanel.SetActive(true);
                 player.paused = true;
 
-                
+                player.enabled = false;
             }
             else if (player.paused && !player.gameOver)
             {
@@ -107,6 +107,7 @@ public class GameController : MonoBehaviour
         pausePanel.SetActive(false);
 
         player.paused = false;
+        player.enabled = true;
     }
 
     public void Quit()

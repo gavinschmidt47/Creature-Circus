@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        if (!agent.pathPending && agent.remainingDistance < 6.5f)
         {
             if (agent.destination == patrol1)
             {

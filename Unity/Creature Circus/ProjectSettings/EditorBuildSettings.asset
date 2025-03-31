@@ -14,13 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Rhino.unity
     guid: e6e6efb3571c34a4c887f930f5bd42d5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainHub.unity
     guid: ef7066582d02fff4cb0fae33c25d032a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Monkey.unity
     guid: 0da9739ba222ab6449fea17e215264c7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Cheetah.unity
     guid: 63ec7069d52216a43aa81d45280f6066
   m_configObjects:
