@@ -105,12 +105,10 @@ public class PlayerController : MonoBehaviour
         if ((inVel.x > 0.001f || inVel.x < -0.001f) || (inVel.y > 0.001f || inVel.y < -0.001f))
         {
             myAnimator.SetBool("Walking", true);
-            Debug.Log("Moving");
         }
         else
         {
             myAnimator.SetBool("Walking", false);
-            Debug.Log("Not Moving");
         }
         //Apply gravity
         if (!controller.isGrounded)
