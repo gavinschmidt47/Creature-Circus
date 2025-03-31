@@ -142,6 +142,7 @@ public class GameController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         winPanel.SetActive(true);
+        player.gameObject.SetActive(false);
     }
 
     public void LoseGame()
@@ -152,6 +153,7 @@ public class GameController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         losePanel.SetActive(true);
+        player.gameObject.SetActive(false);
     }
 
     public void ReRhino()

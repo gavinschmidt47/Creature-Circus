@@ -85,6 +85,9 @@ public class PlayerController : MonoBehaviour
         infStam = false;
         paused = false;
         gameOver = false;
+
+        //Lock rotations by overriding transform rotation
+        transform.rotation = Quaternion.identity;
     }
 
     void Update()
@@ -99,6 +102,16 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         inVel = movement.ReadValue<Vector2>() * playerSpeed * Time.deltaTime * boost;
+        if ((inVel.x > 0.001f || inVel.x < -0.001f) || (inVel.y > 0.001f || inVel.y < -0.001f))
+        {
+            myAnimator.SetBool("Walking", true);
+            Debug.Log("Moving");
+        }
+        else
+        {
+            myAnimator.SetBool("Walking", false);
+            Debug.Log("Not Moving");
+        }
         //Apply gravity
         if (!controller.isGrounded)
             upVel += gravScale * gravMult * Time.deltaTime;
@@ -110,28 +123,8 @@ public class PlayerController : MonoBehaviour
         //Apply input
         controller.Move(targetVel);
 
-    // Check to see if moving, trigger movement animation
-        if (move.x > 0.001f || move.z > 0.001f)
-        {
-            myAnimator.SetTrigger("Move");
-            Debug.Log("Moving");
-        }
-        else
-        {
-            myAnimator.ResetTrigger("Move");
-            Debug.Log("Not Moving");
-        }
-
-        if (upVel > 0.001f)
-        {
-            myAnimator.SetTrigger("Jump");
-            Debug.Log("Jumping");
-        }
-        else
-        {
-            myAnimator.ResetTrigger("Jump");
-            Debug.Log("Not Jumping");
-        }
+        // Check to see if moving, trigger movement animation
+        
     }
 
     //Called from Player Input
