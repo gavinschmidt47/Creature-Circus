@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     public Vector3 patrol4;
 
     private NavMeshAgent agent;
+    private int currentPatrolIndex = 1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,29 +22,33 @@ public class EnemyController : MonoBehaviour
             Debug.LogError("NavMeshAgent component not found on this GameObject.");
             return;
         }
+        // Set the initial destination to patrol1
+        agent.SetDestination(patrol1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!agent.pathPending && agent.remainingDistance < 6.5f)
+        Debug.Log("Distance to patrol1: " + Vector3.Distance(this.transform.position, patrol1));
+        if (Vector3.Distance(this.transform.position, patrol1) <= 30.5f && currentPatrolIndex == 1)
         {
-            if (agent.destination == patrol1)
-            {
             agent.SetDestination(patrol2);
-            }
-            else if (agent.destination == patrol2)
-            {
+            currentPatrolIndex = 2;
+        }
+        else if (Vector3.Distance(this.transform.position, patrol2) <= 30.5f && currentPatrolIndex == 2)
+        {
             agent.SetDestination(patrol3);
-            }
-            else if (agent.destination == patrol3)
-            {
+            currentPatrolIndex = 3;
+        }
+        else if (Vector3.Distance(this.transform.position, patrol3) <= 30.5f && currentPatrolIndex == 3)
+        {
             agent.SetDestination(patrol4);
-            }
-            else
-            {
+            currentPatrolIndex = 4;
+        }
+        else if (Vector3.Distance(this.transform.position, patrol4) <= 30.5f && currentPatrolIndex == 4)
+        {
             agent.SetDestination(patrol1);
-            }
+            currentPatrolIndex = 1;
         }
     }
 }
