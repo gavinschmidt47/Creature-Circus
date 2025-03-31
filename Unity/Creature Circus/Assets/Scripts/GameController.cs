@@ -153,4 +153,12 @@ public class GameController : MonoBehaviour
         Cursor.visible = true;
         losePanel.SetActive(true);
     }
+
+    public void ReRhino()
+    {
+        SceneManager.LoadScene("Rhino");
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 }

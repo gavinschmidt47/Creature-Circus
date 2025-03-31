@@ -19,6 +19,10 @@ public class PlayerController : MonoBehaviour
     public float heldJumpLength;
     [Tooltip("Melee hitbox collider")]
     public GameObject attackBox;
+    [Tooltip("Audio source for the hit sound")]
+    public AudioSource hitSound;
+    [Tooltip("Audio source for the jump sound")]
+    public AudioSource jumpSound;
     
     private float upVel;
     private Vector2 inVel;
@@ -39,8 +43,11 @@ public class PlayerController : MonoBehaviour
     private InputAction movement;
     private InputAction look;
 
-// Animator
-public Animator myAnimator;
+    // Animator
+    [Header("Animator")]
+    [Tooltip("Animator for the player")]
+    public Animator myAnimator;
+
     
     //Controller
     private CharacterController controller;
@@ -78,7 +85,6 @@ public Animator myAnimator;
         infStam = false;
         paused = false;
         gameOver = false;
-
     }
 
     void Update()
@@ -135,6 +141,8 @@ public Animator myAnimator;
         if (context.started)
         {
             buttonHeld = true;
+            //Play sound
+            jumpSound.PlayOneShot(jumpSound.clip);
         }
         else if (context.canceled)
         {
@@ -202,6 +210,8 @@ public Animator myAnimator;
     {
         if (!context.started) return;
         StartCoroutine(inAttack(attackBox));
+        //Play sound
+        hitSound.PlayOneShot(hitSound.clip);
     }
 
     private IEnumerator inAttack(GameObject box)
