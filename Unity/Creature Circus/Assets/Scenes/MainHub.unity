@@ -370,29 +370,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &119513426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119513420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8a4f507d134f1649a89c901f39a8aba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSpeed: 20
-  playerJump: 1.2
-  gravScale: -5
-  gravMult: 1
-  heldJumpLength: 0.8
-  heldJumpPower: 0.7
-  attackBox: {fileID: 408955557}
-  hitSound: {fileID: 119513425}
-  jumpSound: {fileID: 119513424}
-  inputs: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  myAnimator: {fileID: 119513422}
 --- !u!114 &119513427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,7 +405,7 @@ MonoBehaviour:
     m_ActionName: 'Player/Look[/Mouse/delta]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 119513426}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: Attack
         m_Mode: 0
@@ -452,7 +429,7 @@ MonoBehaviour:
     m_ActionName: 'Player/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 119513426}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: Jump
         m_Mode: 0
@@ -535,6 +512,29 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &119513428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119513420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a4f507d134f1649a89c901f39a8aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 20
+  playerJump: 1.2
+  gravScale: -5
+  gravMult: 1
+  heldJumpLength: 0.8
+  heldJumpPower: 0.7
+  attackBox: {fileID: 408955557}
+  hitSound: {fileID: 119513425}
+  jumpSound: {fileID: 119513424}
+  inputs: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  myAnimator: {fileID: 119513422}
 --- !u!1 &154928218
 GameObject:
   m_ObjectHideFlags: 0
@@ -6688,9 +6688,6 @@ PrefabInstance:
       addedObject: {fileID: 119513427}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db28f1a354f02f4408def287453b26ce, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 119513426}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db28f1a354f02f4408def287453b26ce, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 119513425}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db28f1a354f02f4408def287453b26ce, type: 3}
       insertIndex: -1
@@ -6701,6 +6698,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db28f1a354f02f4408def287453b26ce, type: 3}
       insertIndex: -1
       addedObject: {fileID: 119513422}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db28f1a354f02f4408def287453b26ce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 119513428}
   m_SourcePrefab: {fileID: 100100000, guid: db28f1a354f02f4408def287453b26ce, type: 3}
 --- !u!1 &1859613457
 GameObject:
@@ -7667,7 +7667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46299efeb4871f44b8f921179fe59779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 119513426}
+  player: {fileID: 0}
   playerControls: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   pausePanel: {fileID: 2023196305}
   winPanel: {fileID: 0}
