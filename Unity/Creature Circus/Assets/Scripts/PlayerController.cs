@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public float gravMult;
     [Tooltip("How long the player can hold the jump button")]
     public float heldJumpLength;
+    [Tooltip("Manage power of the held jump")]
+    public float heldJumpPower;
     [Tooltip("Melee hitbox collider")]
     public GameObject attackBox;
     [Tooltip("Audio source for the hit sound")]
@@ -60,6 +62,13 @@ public class PlayerController : MonoBehaviour
         movement.Enable();
         look = inputs.FindAction("Look");
         look.Enable();
+    }
+
+    void OnDisable()
+    {
+        //Disables input when not in use
+        movement.Disable();
+        look.Disable();
     }
 
     void Start()
@@ -111,9 +120,14 @@ public class PlayerController : MonoBehaviour
             myAnimator.SetBool("Walking", false);
         }
         //Apply gravity
-        if (!controller.isGrounded)
+        if (!controller.isGrounded && !doubleJump)
+        {
             upVel += gravScale * gravMult * Time.deltaTime;
-
+        }
+        else if (!controller.isGrounded && doubleJump)
+        {
+            upVel += heldJumpPower * Time.deltaTime;
+        }
         //Convert to Vector3 for SimpleMove
         Vector3 move = transform.right * inVel.x + transform.forward * inVel.y;
         targetVel = new Vector3(move.x, upVel, move.z);
@@ -138,6 +152,7 @@ public class PlayerController : MonoBehaviour
         else if (context.canceled)
         {
             buttonHeld = false;
+            doubleJump = false; 
         }
 
         //Gets rid of 2/3 button contexts
@@ -169,6 +184,7 @@ public class PlayerController : MonoBehaviour
             timer -= Time.deltaTime;
             yield return null;
         }
+        doubleJump = false;
         boost = 1;
     }
 
@@ -188,6 +204,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (hit.gameObject.CompareTag("Win"))
         {
+            PlayerPrefs.SetInt("levelsCompleted", PlayerPrefs.GetInt("levelsCompleted") + 1);
             gameController.WinGame();
         }
         else if (hit.gameObject.CompareTag("Enemy") && !invincible)

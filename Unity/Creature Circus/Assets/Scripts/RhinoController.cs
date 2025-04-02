@@ -75,12 +75,12 @@ public class RhinoController : MonoBehaviour
             inCooling = false;
             charge = chargeMax;
             chargeBar.value = chargeMax;
-            chargeColorUI.color = chargeColor.color;
+            //chargeColorUI.color = chargeColor.color;
         }
         else if (charge <= 0 && !inCooling)
         {
             inCooling = true;
-            chargeColor.color = cooldownColor.color;
+            //chargeColor.color = cooldownColor.color;
         }
         
         if (playerController.paused || playerController.gameOver)

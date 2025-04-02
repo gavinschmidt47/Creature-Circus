@@ -20,7 +20,7 @@ public class MainMenuController : MonoBehaviour
 
     public void Play()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Rhino");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainHub");
     }
 
     public void Options()

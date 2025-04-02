@@ -118,6 +118,13 @@ public class GameController : MonoBehaviour
     public void ToHub()
     {
         SceneManager.LoadScene("MainHub");
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        player.gameObject.SetActive(true);
+        player.paused = false;
+        player.gameOver = false;
+        player.enabled = true;
     }
 
     private IEnumerator Timer()

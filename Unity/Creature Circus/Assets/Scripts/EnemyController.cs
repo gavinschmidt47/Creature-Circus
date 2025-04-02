@@ -29,7 +29,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Distance to patrol1: " + Vector3.Distance(this.transform.position, patrol1));
         if (Vector3.Distance(this.transform.position, patrol1) <= 30.5f && currentPatrolIndex == 1)
         {
             agent.SetDestination(patrol2);
