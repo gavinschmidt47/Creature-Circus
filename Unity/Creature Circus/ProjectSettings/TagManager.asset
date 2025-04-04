@@ -12,6 +12,8 @@ TagManager:
   - Breakable
   - Enemy
   - Win
+  - XYClimbable
+  - YZClimbable
   layers:
   - Default
   - TransparentFX

@@ -11,6 +11,8 @@ public class MonkeyController : MonoBehaviour
     public float jumpForce = 10.0f;
 
     private bool isClimbing = false;
+    private bool XYClimb = false;
+    private bool YZClimb = false;
     private Vector3 wallLocation;
 
     void Update()
@@ -45,6 +47,20 @@ public class MonkeyController : MonoBehaviour
             wallLocation = other.transform.position;
             isClimbing = true;
         }
+        else if (other.CompareTag("XYClimbable"))
+        {
+            //Sets the wall location and starts climbing
+            wallLocation = other.transform.position;
+            isClimbing = true;
+            XYClimb = true;
+        }
+        else if (other.CompareTag("YZClimbable"))
+        {
+            //Sets the wall location and starts climbing
+            wallLocation = other.transform.position;
+            isClimbing = true;
+            YZClimb = true;
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -68,6 +84,14 @@ public class MonkeyController : MonoBehaviour
         //Need to neutralize sideways movement
         //Finds direction to move away from wall
         Vector3 jumpDirection = (wallDirection.normalized * jumpForce / 4) + transform.up;
+        if (XYClimb)
+        {
+            jumpDirection = new Vector3(0, jumpDirection.y, jumpDirection.z);
+        }
+        else if (YZClimb)
+        {
+            jumpDirection = new Vector3(jumpDirection.x, 0, jumpDirection.z);
+        }
 
         //Moves the character in a jump arc
         float jumpTime = 0.0f;
