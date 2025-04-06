@@ -50,10 +50,17 @@ public class GameController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        pausePanel.SetActive(false);
         sceneName = SceneManager.GetActiveScene().name;
         if (sceneName == "Rhino")
             StartCoroutine(Timer());
+        
+        //Disable Cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        player.gameOver = false;
+        player.paused = false;
+        player.enabled = true;
     }
 
     // Update is called once per frame
@@ -62,7 +69,7 @@ public class GameController : MonoBehaviour
         //Pause
         if (pause.triggered)
         {
-            if (!player.paused && !player.gameOver)
+            if (!player.paused && !player.gameOver )
             {
                 //Freeze Time
                 Time.timeScale = 0;
@@ -88,7 +95,6 @@ public class GameController : MonoBehaviour
         }
 
         if (sceneName == "Rhino")
-        
         {
             //Time Left
             timeLeft -= Time.deltaTime;
@@ -167,6 +173,14 @@ public class GameController : MonoBehaviour
     public void ReRhino()
     {
         SceneManager.LoadScene("Rhino");
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void ReMonkey()
+    {
+        SceneManager.LoadScene("Monkey");
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

@@ -6,12 +6,20 @@ using UnityEngine.InputSystem;
 public class CheetahController : MonoBehaviour
 {
     //PlayerStats
+    [Header("Player Stats")]
+    [Tooltip("Speed of the player")]
     public float playerSpeed;
+    [Tooltip("Jump height of the player")]
     public float playerJump;
+    [Tooltip("How long the player can hold the jump button")]
     public float heldJumpLength;
+    [Tooltip("Maximum speed of the player")]
     public float maxSpeed;
+    [Tooltip("Minimum speed to get rid of friction")]
     public float minSpeed;
+    [Tooltip("How easily the player can stop moving")]
     public float breakForce;
+    [Tooltip("Players attack box")]
     public GameObject attackBox;
     
     private Vector2 inVel;
@@ -20,9 +28,13 @@ public class CheetahController : MonoBehaviour
     private float boost;
     private float currSpeed;
     private bool grounded;
+    internal bool paused;
+    internal bool gameOver;
 
 
     //Input
+    [Header("No Touchy <3")]
+    public CheetahGameController gameController;
     public InputActionAsset inputs;
     
     private InputAction movement;
@@ -156,6 +168,14 @@ public class CheetahController : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             grounded = true;
+        }
+        if (other.gameObject.CompareTag("Win"))
+        {
+            gameController.WinGame();
+        }
+        if (other.gameObject.CompareTag("Lose"))
+        {
+            gameController.LoseGame();
         }
     }
 
