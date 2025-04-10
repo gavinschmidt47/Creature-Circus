@@ -82,6 +82,11 @@ public class GameController : MonoBehaviour
                 pausePanel.SetActive(true);
                 player.paused = true;
 
+                //Set toggles
+                invT.isOn = player.invincible;
+                infT.isOn = player.infStam;
+
+                //Disable Player
                 player.enabled = false;
             }
             else if (player.paused && !player.gameOver)

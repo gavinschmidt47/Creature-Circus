@@ -65,7 +65,7 @@ public class MonkeyController : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Climbable"))
+        if (other.CompareTag("Climbable") || other.CompareTag("XYClimbable") || other.CompareTag("YZClimbable"))
         {
             //Moves the character up from the wall
             StartCoroutine(JumpAway(Vector3.zero));

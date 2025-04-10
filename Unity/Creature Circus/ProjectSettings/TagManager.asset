@@ -15,6 +15,7 @@ TagManager:
   - XYClimbable
   - YZClimbable
   - Lose
+  - Jump
   layers:
   - Default
   - TransparentFX

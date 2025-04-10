@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public AudioSource hitSound;
     [Tooltip("Audio source for the jump sound")]
     public AudioSource jumpSound;
+    [Tooltip("Bounce multiplier for the jump pad")]
+    public float bounceMultiplier = 1.5f;
     
     private float upVel;
     private Vector2 inVel;
@@ -54,6 +56,12 @@ public class PlayerController : MonoBehaviour
     //Controller
     private CharacterController controller;
     private GameController gameController;
+
+    //UI
+    [Header("UI")]
+    [Tooltip("UI for cheats")]
+    public GameObject infStaminaUI;
+    public GameObject invincibleUI;
 
     void OnEnable()
     {
@@ -211,6 +219,13 @@ public class PlayerController : MonoBehaviour
         {
             gameController.LoseGame();
         }
+        else if (hit.gameObject.CompareTag("Jump"))
+        {
+            upVel = playerJump * bounceMultiplier;
+            //Play sound
+            jumpSound.PlayOneShot(jumpSound.clip);
+        }
+        
     }
 
     //Called from PlayerInput
@@ -236,10 +251,16 @@ public class PlayerController : MonoBehaviour
         if (inf)
         {
             infStam = true;
+
+            // Set the stamina UI to active
+            infStaminaUI.SetActive(true);
         }
         else
         {
             infStam = false;
+
+            // Set the stamina UI to inactive
+            infStaminaUI.SetActive(false);
         }
         Debug.Log("Infinite Stamina set to: " + infStam);
     }
@@ -248,10 +269,16 @@ public class PlayerController : MonoBehaviour
         if (inv)
         {
             invincible = true;
+
+            // Set the invincible UI to active
+            invincibleUI.SetActive(true);
         }
         else
         {
             invincible = false;
+
+            // Set the invincible UI to inactive
+            invincibleUI.SetActive(false);
         }
     }
 }
