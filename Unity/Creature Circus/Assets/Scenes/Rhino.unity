@@ -5893,6 +5893,7 @@ RectTransform:
   - {fileID: 619310415}
   - {fileID: 260095584}
   - {fileID: 264304498}
+  - {fileID: 1944232887}
   m_Father: {fileID: 245490185}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7278,7 +7279,6 @@ RectTransform:
   - {fileID: 1502729920}
   - {fileID: 1688853006}
   - {fileID: 720133529}
-  - {fileID: 1944232887}
   m_Father: {fileID: 245490185}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -48218,7 +48218,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 243121758}
-  m_Father: {fileID: 291061897}
+  m_Father: {fileID: 246260118}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -48269,9 +48269,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CheetahGameController, Assembly-CSharp
-        m_MethodName: Quit
+      - m_Target: {fileID: 258524550}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: ToHub
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
