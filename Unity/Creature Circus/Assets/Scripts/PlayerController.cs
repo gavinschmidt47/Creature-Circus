@@ -215,7 +215,7 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.SetInt("levelsCompleted", PlayerPrefs.GetInt("levelsCompleted") + 1);
             gameController.WinGame();
         }
-        else if (hit.gameObject.CompareTag("Lose")
+        else if (hit.gameObject.CompareTag("Lose"))
         {
             gameController.LoseGame();
         }
