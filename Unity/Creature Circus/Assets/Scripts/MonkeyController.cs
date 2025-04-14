@@ -7,6 +7,7 @@ public class MonkeyController : MonoBehaviour
 {
     public CharacterController controller;
     public PlayerController playerController;
+    public GameObject climbCam;
     public float climbSpeed = 3.0f;
     public float jumpForce = 10.0f;
 
@@ -36,6 +37,7 @@ public class MonkeyController : MonoBehaviour
         {
             //Re-enables player movement
             playerController.enabled = true;
+            climbCam.SetActive(false); 
         }
     }
 
@@ -77,11 +79,15 @@ public class MonkeyController : MonoBehaviour
     {
         //Moves characterm up the wall
         controller.Move(Vector3.up * climbSpeed * Time.deltaTime);
+
+        //Sets the camera to the climbing camera
+        climbCam.SetActive(true);
     }
 
     IEnumerator JumpAway(Vector3 wallDirection)
     {
-        //Need to neutralize sideways movement
+        //Disables climbing camera
+        climbCam.SetActive(false);
         //Finds direction to move away from wall
         Vector3 jumpDirection = (wallDirection.normalized * jumpForce / 4) + transform.up;
         if (XYClimb)

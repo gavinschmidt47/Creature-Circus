@@ -51,6 +51,10 @@ public class PlayerController : MonoBehaviour
     [Header("Animator")]
     [Tooltip("Animator for the player")]
     public Animator myAnimator;
+    [Tooltip("How long cam animation takes to play")]
+    public float camAnimTime = 0.5f;
+
+    private bool camAn;
 
     
     //Controller
@@ -105,19 +109,22 @@ public class PlayerController : MonoBehaviour
 
         //Lock rotations by overriding transform rotation
         transform.rotation = Quaternion.identity;
+
+        StartCoroutine(CamAnim());
     }
 
     void Update()
     {
+        if (paused || gameOver || camAn) return;
         //Look around
         Vector2 lookDir = look.ReadValue<Vector2>();
         transform.Rotate(0, lookDir.x, 0);
-
     }
 
     //Fixed update for physics regulation
     void FixedUpdate()
     {
+        if (paused || gameOver || camAn) return; 
         inVel = movement.ReadValue<Vector2>() * playerSpeed * Time.deltaTime * boost;
         if ((inVel.x > 0.001f || inVel.x < -0.001f) || (inVel.y > 0.001f || inVel.y < -0.001f))
         {
@@ -139,12 +146,9 @@ public class PlayerController : MonoBehaviour
         //Convert to Vector3 for SimpleMove
         Vector3 move = transform.right * inVel.x + transform.forward * inVel.y;
         targetVel = new Vector3(move.x, upVel, move.z);
-
-        //Apply input
+       
+        // Apply input
         controller.Move(targetVel);
-
-        // Check to see if moving, trigger movement animation
-        
     }
 
     //Called from Player Input
@@ -194,6 +198,14 @@ public class PlayerController : MonoBehaviour
         }
         doubleJump = false;
         boost = 1;
+    }
+
+    private IEnumerator CamAnim()
+    {
+        //Play camera animation
+        camAn = true;
+        yield return new WaitForSeconds(camAnimTime);
+        camAn = false;
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
