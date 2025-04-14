@@ -215,6 +215,10 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.SetInt("levelsCompleted", PlayerPrefs.GetInt("levelsCompleted") + 1);
             gameController.WinGame();
         }
+        else if (hit.gameObject.CompareTag("Lose"))
+        {
+            gameController.LoseGame();
+        }
         else if (hit.gameObject.CompareTag("Enemy") && !invincible)
         {
             gameController.LoseGame();
