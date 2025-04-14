@@ -16,6 +16,7 @@ TagManager:
   - YZClimbable
   - Lose
   - Jump
+  - SpeedEnemy
   layers:
   - Default
   - TransparentFX
