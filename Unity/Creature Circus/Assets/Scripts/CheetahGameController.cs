@@ -24,6 +24,8 @@ public class CheetahGameController : MonoBehaviour
     public GameObject pausePanel;
     public GameObject winPanel;
     public GameObject losePanel;
+    public Toggle invT;
+    public Toggle infT;
 
 
     //Misc.
@@ -73,6 +75,9 @@ public class CheetahGameController : MonoBehaviour
                 //Enable UI
                 pausePanel.SetActive(true);
                 player.paused = true;
+
+                //Set toggles
+                invT.isOn = player.invincible;
 
                 player.enabled = false;
             }
