@@ -32098,9 +32098,9 @@ MonoBehaviour:
   bounceMultiplier: 1.5
   inputs: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   myAnimator: {fileID: 1431526651}
-  camAnimTime: 0.5
-  infStaminaUI: {fileID: 0}
-  invincibleUI: {fileID: 0}
+  camAnimTime: 7
+  infStaminaUI: {fileID: 2009244757}
+  invincibleUI: {fileID: 1472510636}
 --- !u!114 &1431526650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33598,7 +33598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1472510637
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49101,7 +49101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2009244758
 RectTransform:
   m_ObjectHideFlags: 0
