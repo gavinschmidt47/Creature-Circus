@@ -25,6 +25,7 @@ public class CheetahController : MonoBehaviour
     private Vector2 inVel;
     private bool doubleJump;
     private bool buttonHeld;
+        internal bool invincible;
     private float boost;
     private float currSpeed;
     private bool grounded;
@@ -39,9 +40,17 @@ public class CheetahController : MonoBehaviour
     
     private InputAction movement;
 
+    // Animator
+    [Header("Animator")]
+    [Tooltip("Animator for the player")]
+    public Animator myAnimator;
+
 
     //Player Components
     private Rigidbody rb;
+
+// UI
+     public GameObject invincibleUI;
     
 
     void OnEnable()
@@ -61,6 +70,8 @@ public class CheetahController : MonoBehaviour
 
         //Set curr speed
         currSpeed = 0;
+
+        invincible = false;
     }
 
     //Fixed update for physics regulation
@@ -68,6 +79,14 @@ public class CheetahController : MonoBehaviour
     {
         // Read input value
         inVel = movement.ReadValue<Vector2>();
+         if ((inVel.x > 0.001f || inVel.x < -0.001f) || (inVel.y > 0.001f || inVel.y < -0.001f))
+        {
+            myAnimator.SetBool("Running", true);
+        }
+        else
+        {
+            myAnimator.SetBool("Running", false);
+        }
 
         // Normalize input direction to ensure consistent movement speed
         Vector2 inputDirection = inVel.normalized;
@@ -122,6 +141,9 @@ public class CheetahController : MonoBehaviour
     //Called from Player Input
     public void Jump(InputAction.CallbackContext context)
     {
+           myAnimator.SetBool("Running", false);
+            myAnimator.SetBool("Jumping", true);
+
         //Checks if button is being held
         if (context.started)
         {
@@ -168,14 +190,22 @@ public class CheetahController : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             grounded = true;
+            myAnimator.SetBool("Jumping", false);
+            
         }
         if (other.gameObject.CompareTag("Win"))
         {
             gameController.WinGame();
         }
-        if (other.gameObject.CompareTag("Lose"))
+        if (other.gameObject.CompareTag("Lose") && !invincible)
         {
             gameController.LoseGame();
+        }
+        if (other.gameObject.CompareTag("SpeedEnemy"))
+        {
+            Debug.Log("Hit speed boosting enemy");
+            Destroy(other.gameObject);
+            boost += 0.1f;
         }
     }
 
@@ -198,5 +228,23 @@ public class CheetahController : MonoBehaviour
         box.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         box.SetActive(false);
+    }
+
+     public void Invincible(bool inv)
+    {
+        if (inv)
+        {
+            invincible = true;
+
+            // Set the invincible UI to active
+            invincibleUI.SetActive(true);
+        }
+        else
+        {
+            invincible = false;
+
+            // Set the invincible UI to inactive
+            invincibleUI.SetActive(false);
+        }
     }
 }

@@ -6,6 +6,7 @@ public class Melee : MonoBehaviour
     private void Start() {
         // Get the Audio component attached to the same GameObject
         hitSound = GetComponent<AudioSource>();
+         Debug.Log("MELEE HIT");
         if (hitSound == null) {
             Debug.LogError("AudioSource component not found on this GameObject.");
         }
@@ -16,6 +17,7 @@ public class Melee : MonoBehaviour
             hitSound.PlayOneShot(hitSound.clip);
             // Destroy the enemy object
             Destroy(other.gameObject);
+             Debug.Log("ENEMY WIPED OUT");
         }
     }
 }
