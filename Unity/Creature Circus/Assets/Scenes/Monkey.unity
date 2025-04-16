@@ -14439,6 +14439,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 57d7667447f40fd48952b87ebe8ce3b3, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 57d7667447f40fd48952b87ebe8ce3b3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8748892135801146194, guid: 82f41733ffa224b69a31c81935a2a034, type: 3}
+    - target: {fileID: -7511558181221131132, guid: 57d7667447f40fd48952b87ebe8ce3b3, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8a20b736154c6284abbf307fa1017ec6, type: 2}
     - target: {fileID: 919132149155446097, guid: 57d7667447f40fd48952b87ebe8ce3b3, type: 3}
       propertyPath: m_Name
       value: balloon_pot
@@ -18649,9 +18661,9 @@ MonoBehaviour:
         z: 12.370307
       Rotation:
         value:
-          x: 0.09756943
-          y: 0.9364478
-          z: -0.2594816
+          x: 0.09756944
+          y: 0.93644774
+          z: -0.25948155
           w: -0.21497697
     - Position:
         x: -7.5
@@ -18667,10 +18679,10 @@ MonoBehaviour:
         z: 9.864804
       Rotation:
         value:
-          x: -0.08433451
-          y: 0.93098587
-          z: -0.2620229
-          w: 0.23978537
+          x: -0.084334515
+          y: 0.9309858
+          z: -0.26202297
+          w: 0.23978542
     - Position:
         x: 4.5
         y: 7.9
