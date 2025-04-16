@@ -73,7 +73,7 @@ public class CheetahController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
 
         //Set speed boost
-        boost = 0.7f;
+        boost = 1;
 
         //Set curr speed
         currSpeed = 0;
