@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     [Header("Enemy Movement")]
     public Vector3[] patrolPoints;
     [Tooltip("Distance to change patrol points")]
-    public float patrolChange = 50f;
+    public float patrolChange = 10f;
 
     private NavMeshAgent agent;
     private int currentPatrolIndex = 0;
