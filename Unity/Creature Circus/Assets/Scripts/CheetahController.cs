@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CheetahController : MonoBehaviour
 {
@@ -21,16 +24,19 @@ public class CheetahController : MonoBehaviour
     public float breakForce;
     [Tooltip("Players attack box")]
     public GameObject attackBox;
+    [Tooltip("How long the camera animation takes to play")]
+    public float camAnimTime = 10f;
     
     private Vector2 inVel;
     private bool doubleJump;
     private bool buttonHeld;
-        internal bool invincible;
+    internal bool invincible;
     private float boost;
     private float currSpeed;
     private bool grounded;
     internal bool paused;
     internal bool gameOver;
+    private bool camAnim;
 
 
     //Input
@@ -49,8 +55,9 @@ public class CheetahController : MonoBehaviour
     //Player Components
     private Rigidbody rb;
 
-// UI
-     public GameObject invincibleUI;
+    // UI
+    public GameObject invincibleUI;
+    public TextMeshProUGUI speedText;
     
 
     void OnEnable()
@@ -72,11 +79,14 @@ public class CheetahController : MonoBehaviour
         currSpeed = 0;
 
         invincible = false;
+        
+        StartCoroutine(CamAnim());
     }
 
     //Fixed update for physics regulation
     void FixedUpdate()
     {
+        if (paused || gameOver || camAnim) return; 
         // Read input value
         inVel = movement.ReadValue<Vector2>();
          if ((inVel.x > 0.001f || inVel.x < -0.001f) || (inVel.y > 0.001f || inVel.y < -0.001f))
@@ -135,7 +145,12 @@ public class CheetahController : MonoBehaviour
         rb.AddForce(appliedVelocity, ForceMode.Force);
         // rb.linearVelocity = new Vector3(rb.linearVelocity.x, velocity.y, rb.linearVelocity.z);
         // Debug input values
-        Debug.Log("Velocity: " + rb.linearVelocity);
+        speedText.text = rb.linearVelocity.magnitude.ToString("F2") + " m/s";
+
+        // Change color based on speed
+        float speedPercentage = Mathf.Clamp(rb.linearVelocity.magnitude / maxSpeed, 0, 1);
+        Color speedColor = Color.Lerp(Color.white, Color.red, speedPercentage);
+        speedText.color = speedColor;
     }
 
     //Called from Player Input
@@ -246,5 +261,12 @@ public class CheetahController : MonoBehaviour
             // Set the invincible UI to inactive
             invincibleUI.SetActive(false);
         }
+    }
+
+    private IEnumerator CamAnim()
+    {
+        camAnim = true;
+        yield return new WaitForSeconds(camAnimTime);
+        camAnim = false;
     }
 }
