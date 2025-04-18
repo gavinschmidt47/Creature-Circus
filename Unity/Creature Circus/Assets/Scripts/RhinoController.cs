@@ -87,6 +87,7 @@ public class RhinoController : MonoBehaviour
         {
             //If the game is paused, stop charging
             charging = false;
+            playerController.invincible = false;
             if (chargeCoroutine != null)
                 StopCoroutine(chargeCoroutine);
             followCam.SetActive(true);
@@ -104,6 +105,7 @@ public class RhinoController : MonoBehaviour
             chargeCoroutine = StartCoroutine(Charge());
             followCam.SetActive(false);
             chargeCam.SetActive(true);
+            playerController.invincible = true;
         }
         else if (context.canceled)
         {
@@ -115,6 +117,7 @@ public class RhinoController : MonoBehaviour
 
             playerController.enabled = true;
             charging = false;
+            playerController.invincible = false;
         }
         else return;
     }
@@ -148,6 +151,10 @@ public class RhinoController : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit other) {
         if (other.gameObject.CompareTag("Breakable") && charging)
+        {
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.CompareTag("Enemy") && charging)
         {
             Destroy(other.gameObject);
         }
