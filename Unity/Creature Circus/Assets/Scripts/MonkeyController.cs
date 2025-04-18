@@ -39,6 +39,9 @@ public class MonkeyController : MonoBehaviour
             playerController.enabled = true;
             climbCam.SetActive(false); 
         }
+
+        if (playerController.doubleJump && playerController.buttonHeld)
+            climbCam.SetActive(true);
     }
 
     void OnTriggerEnter(Collider other)

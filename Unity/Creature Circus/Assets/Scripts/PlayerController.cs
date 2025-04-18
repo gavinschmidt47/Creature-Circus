@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour
     private float upVel;
     private Vector2 inVel;
     private Vector3 targetVel;
-    private bool doubleJump;
-    private bool buttonHeld;
+    internal bool doubleJump;
+    internal bool buttonHeld;
     private float boost;
     internal bool invincible;
     internal bool infStam;
