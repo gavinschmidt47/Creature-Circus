@@ -22,6 +22,8 @@ public class CheetahController : MonoBehaviour
     public float minSpeed;
     [Tooltip("How easily the player can stop moving")]
     public float breakForce;
+    [Tooltip("How easily the player can steer")]
+    public float steerForce;
     [Tooltip("Players attack box")]
     public GameObject attackBox;
     [Tooltip("How long the camera animation takes to play")]
@@ -127,7 +129,7 @@ public class CheetahController : MonoBehaviour
         }
 
         Vector2 targetVelocity = inputDirection * currSpeed * boost * Time.deltaTime;
-        Vector3 appliedVelocity = new Vector3(targetVelocity.x, 0, targetVelocity.y);
+        Vector3 appliedVelocity = new Vector3(targetVelocity.x * steerForce, 0, targetVelocity.y);
 
         //Break force
         if (rb.linearVelocity.magnitude > 0 && inVel.magnitude == 0)

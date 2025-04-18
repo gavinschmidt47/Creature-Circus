@@ -2247,7 +2247,7 @@ Transform:
   m_GameObject: {fileID: 298563076}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.504275, y: 1.1, z: -8.22482}
+  m_LocalPosition: {x: 0.504275, y: 1.1, z: -1.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2274,6 +2274,7 @@ MonoBehaviour:
   maxSpeed: 40
   minSpeed: 8
   breakForce: 1.2
+  steerForce: 3
   attackBox: {fileID: 1315205586}
   camAnimTime: 7
   gameController: {fileID: 978698141}
@@ -5642,7 +5643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2809368192190024211, guid: a58cba6b7af431b4ba1da79f09040327, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.42482
+      value: -6.35
       objectReference: {fileID: 0}
     - target: {fileID: 2809368192190024211, guid: a58cba6b7af431b4ba1da79f09040327, type: 3}
       propertyPath: m_LocalRotation.w
