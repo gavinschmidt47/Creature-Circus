@@ -15,6 +15,18 @@ public class HubController : MonoBehaviour
     public Material unavailable;
     public Material completed;
 
+    //Particles
+    [Header("Particles")]
+    public GameObject gate1Particles;
+    public GameObject gate2Particles;
+    public GameObject gate3Particles;
+
+    //Animation time
+    [Header("Animation Time")]
+    public float firstWaitTime = 2f;
+    public float secondWaitTime = 2f;   
+    public float thirdWaitTime = 2f;
+
     private int levelsCompleted;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -44,7 +56,14 @@ public class HubController : MonoBehaviour
 
     private IEnumerator CompleteHub()
     {
-        yield return new WaitForSeconds(2f);
-        
+        yield return new WaitForSeconds(firstWaitTime);
+        gate2.GetComponent<Renderer>().material = completed;
+        gate2Particles.SetActive(true);
+        yield return new WaitForSeconds(secondWaitTime);
+        gate3.GetComponent<Renderer>().material = completed;
+        gate3Particles.SetActive(true);
+        yield return new WaitForSeconds(thirdWaitTime);
+        gate1.GetComponent<Renderer>().material = completed;
+        gate1Particles.SetActive(true);
     }
 }
