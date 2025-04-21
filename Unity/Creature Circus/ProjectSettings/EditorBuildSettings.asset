@@ -9,11 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/MainHub.unity
-    guid: ef7066582d02fff4cb0fae33c25d032a
+    path: Assets/Scenes/MainMenu.unity
+    guid: e235c8dc1e9ee5941ab6b5014ff429bf
   - enabled: 1
     path: Assets/Scenes/Rhino.unity
     guid: e6e6efb3571c34a4c887f930f5bd42d5
+  - enabled: 1
+    path: Assets/Scenes/MainHub.unity
+    guid: ef7066582d02fff4cb0fae33c25d032a
   - enabled: 1
     path: Assets/Scenes/Monkey.unity
     guid: 0da9739ba222ab6449fea17e215264c7

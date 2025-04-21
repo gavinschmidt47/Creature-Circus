@@ -2,34 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CheetahController : MonoBehaviour
 {
     //PlayerStats
+    [Header("Player Stats")]
+    [Tooltip("Speed of the player")]
     public float playerSpeed;
+    [Tooltip("Jump height of the player")]
     public float playerJump;
+    [Tooltip("How long the player can hold the jump button")]
     public float heldJumpLength;
+    [Tooltip("Maximum speed of the player")]
     public float maxSpeed;
+    [Tooltip("Minimum speed to get rid of friction")]
     public float minSpeed;
+    [Tooltip("How easily the player can stop moving")]
     public float breakForce;
+    [Tooltip("How easily the player can steer")]
+    public float steerForce;
+    [Tooltip("Players attack box")]
     public GameObject attackBox;
+    [Tooltip("How long the camera animation takes to play")]
+    public float camAnimTime = 10f;
+    [Tooltip("How much speed the player gets from the speed boosting enemy")]
+    public float speedBoost = 10f;
     
     private Vector2 inVel;
     private bool doubleJump;
     private bool buttonHeld;
+    internal bool invincible;
     private float boost;
     private float currSpeed;
     private bool grounded;
+    internal bool paused;
+    internal bool gameOver;
+    private bool camAnim;
 
 
     //Input
+    [Header("No Touchy <3")]
+    public CheetahGameController gameController;
     public InputActionAsset inputs;
     
     private InputAction movement;
 
+    // Animator
+    [Header("Animator")]
+    [Tooltip("Animator for the player")]
+    public Animator myAnimator;
+
 
     //Player Components
     private Rigidbody rb;
+
+    // UI
+    public GameObject invincibleUI;
+    public TextMeshProUGUI speedText;
     
 
     void OnEnable()
@@ -45,17 +77,30 @@ public class CheetahController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
 
         //Set speed boost
-        boost = 1;
+        boost = 0.7f;
 
         //Set curr speed
         currSpeed = 0;
+
+        invincible = false;
+        
+        StartCoroutine(CamAnim());
     }
 
     //Fixed update for physics regulation
     void FixedUpdate()
     {
+        if (paused || gameOver || camAnim) return; 
         // Read input value
         inVel = movement.ReadValue<Vector2>();
+         if ((inVel.x > 0.001f || inVel.x < -0.001f) || (inVel.y > 0.001f || inVel.y < -0.001f))
+        {
+            myAnimator.SetBool("Running", true);
+        }
+        else
+        {
+            myAnimator.SetBool("Running", false);
+        }
 
         // Normalize input direction to ensure consistent movement speed
         Vector2 inputDirection = inVel.normalized;
@@ -86,7 +131,7 @@ public class CheetahController : MonoBehaviour
         }
 
         Vector2 targetVelocity = inputDirection * currSpeed * boost * Time.deltaTime;
-        Vector3 appliedVelocity = new Vector3(targetVelocity.x, 0, targetVelocity.y);
+        Vector3 appliedVelocity = new Vector3(targetVelocity.x * steerForce, 0, targetVelocity.y);
 
         //Break force
         if (rb.linearVelocity.magnitude > 0 && inVel.magnitude == 0)
@@ -104,12 +149,20 @@ public class CheetahController : MonoBehaviour
         rb.AddForce(appliedVelocity, ForceMode.Force);
         // rb.linearVelocity = new Vector3(rb.linearVelocity.x, velocity.y, rb.linearVelocity.z);
         // Debug input values
-        Debug.Log("Velocity: " + rb.linearVelocity);
+        speedText.text = rb.linearVelocity.magnitude.ToString("F2") + " m/s";
+
+        // Change color based on speed
+        float speedPercentage = Mathf.Clamp(rb.linearVelocity.magnitude / maxSpeed, 0, 1);
+        Color speedColor = Color.Lerp(Color.white, Color.red, speedPercentage);
+        speedText.color = speedColor;
     }
 
     //Called from Player Input
     public void Jump(InputAction.CallbackContext context)
     {
+           myAnimator.SetBool("Running", false);
+            myAnimator.SetBool("Jumping", true);
+
         //Checks if button is being held
         if (context.started)
         {
@@ -156,6 +209,22 @@ public class CheetahController : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             grounded = true;
+            myAnimator.SetBool("Jumping", false);
+            
+        }
+        if (other.gameObject.CompareTag("Win"))
+        {
+            gameController.WinGame();
+        }
+        if (other.gameObject.CompareTag("Lose") && !invincible)
+        {
+            gameController.LoseGame();
+        }
+        if (other.gameObject.CompareTag("SpeedEnemy"))
+        {
+            Debug.Log("Hit speed boosting enemy");
+            Destroy(other.gameObject);
+            rb.AddForce(Vector3.forward * speedBoost, ForceMode.Impulse);
         }
     }
 
@@ -178,5 +247,30 @@ public class CheetahController : MonoBehaviour
         box.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         box.SetActive(false);
+    }
+
+     public void Invincible(bool inv)
+    {
+        if (inv)
+        {
+            invincible = true;
+
+            // Set the invincible UI to active
+            invincibleUI.SetActive(true);
+        }
+        else
+        {
+            invincible = false;
+
+            // Set the invincible UI to inactive
+            invincibleUI.SetActive(false);
+        }
+    }
+
+    private IEnumerator CamAnim()
+    {
+        camAnim = true;
+        yield return new WaitForSeconds(camAnimTime);
+        camAnim = false;
     }
 }

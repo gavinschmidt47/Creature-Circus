@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Unity/Creature Circus/Assets/Scripts.meta
 guid: 6f6d0d9dd13a0f947bae929b97335f82
+========
+guid: c7e3ec9e9f860b34f981bac55c07e2a5
+>>>>>>>> Dev:Unity/Creature Circus/Assets/TutorialInfo/Scripts.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

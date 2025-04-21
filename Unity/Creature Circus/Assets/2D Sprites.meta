@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Unity/Creature Circus/Assets/2D Sprites.meta
 guid: 8164698acffe87f4cb911527b71f3f56
+========
+guid: 204d0bdca843d3a45a175dee09246e50
+>>>>>>>> Dev:Unity/Creature Circus/Assets/TutorialInfo.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
