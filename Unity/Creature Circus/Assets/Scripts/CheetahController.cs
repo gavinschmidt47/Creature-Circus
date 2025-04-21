@@ -28,6 +28,8 @@ public class CheetahController : MonoBehaviour
     public GameObject attackBox;
     [Tooltip("How long the camera animation takes to play")]
     public float camAnimTime = 10f;
+    [Tooltip("How much speed the player gets from the speed boosting enemy")]
+    public float speedBoost = 10f;
     
     private Vector2 inVel;
     private bool doubleJump;
@@ -222,7 +224,7 @@ public class CheetahController : MonoBehaviour
         {
             Debug.Log("Hit speed boosting enemy");
             Destroy(other.gameObject);
-            boost += 0.1f;
+            rb.AddForce(Vector3.forward * speedBoost, ForceMode.Impulse);
         }
     }
 

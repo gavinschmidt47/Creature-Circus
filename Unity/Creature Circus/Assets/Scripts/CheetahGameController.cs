@@ -132,6 +132,13 @@ public class CheetahGameController : MonoBehaviour
         Cursor.visible = true;
         winPanel.SetActive(true);
         player.gameObject.SetActive(false);
+
+        // Save progress using PlayerPrefs
+        if (PlayerPrefs.GetInt("CheetahWin") != 1)
+        {
+            PlayerPrefs.SetInt("CheetahWin", 1); // Mark the game as won (1 for true)
+            PlayerPrefs.Save(); // Save the changes
+        }
     }
 
     public void LoseGame()

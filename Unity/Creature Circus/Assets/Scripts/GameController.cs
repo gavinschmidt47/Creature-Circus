@@ -162,6 +162,16 @@ public class GameController : MonoBehaviour
         Cursor.visible = true;
         winPanel.SetActive(true);
         player.gameObject.SetActive(false);
+        if (sceneName == "Rhino" && PlayerPrefs.GetInt("RhinoWin", 0) != 1)
+        {
+            PlayerPrefs.SetInt("RhinoWin", 1);
+            PlayerPrefs.Save();
+        }
+        else if (sceneName == "Monkey" && PlayerPrefs.GetInt("MonkeyWin", 0) != 1)
+        {
+            PlayerPrefs.SetInt("MonkeyWin", 1);
+            PlayerPrefs.Save();
+        }
     }
 
     public void LoseGame()

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class HubController : MonoBehaviour
 {
@@ -18,49 +19,32 @@ public class HubController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (PlayerPrefs.HasKey("levelsCompleted"))
-        {
-            levelsCompleted = PlayerPrefs.GetInt("levelsCompleted");
-        }
-        else
-        {
-            PlayerPrefs.SetInt("levelsCompleted", 0);
-            PlayerPrefs.Save();
+        gate1.GetComponent<Renderer>().material = unavailable;
+        gate2.GetComponent<Renderer>().material = unavailable;
+        gate3.GetComponent<Renderer>().material = unavailable;
 
-            levelsCompleted = 0;
-        }
-        Debug.Log("Levels Completed: " + PlayerPrefs.GetInt("levelsCompleted"));
-
-        //Set gates to completed or available based on levels completed
-        if (levelsCompleted == 0)
+        if (PlayerPrefs.GetInt("RhinoWin") == 1)
         {
             gate1.GetComponent<Renderer>().material = available;
-            gate2.GetComponent<Renderer>().material = unavailable;
-            gate3.GetComponent<Renderer>().material = unavailable;
         }
-        else if (levelsCompleted == 1)
+        if (PlayerPrefs.GetInt("MonkeyWin") == 1)
         {
-            gate1.GetComponent<Renderer>().material = completed;
             gate2.GetComponent<Renderer>().material = available;
-            gate3.GetComponent<Renderer>().material = unavailable;
         }
-        else if (levelsCompleted == 2)
+        if (PlayerPrefs.GetInt("CheetahWin") == 1)
         {
-            gate1.GetComponent<Renderer>().material = completed;
-            gate2.GetComponent<Renderer>().material = completed;
             gate3.GetComponent<Renderer>().material = available;
         }
-        else if (levelsCompleted >= 3)
+
+        if (PlayerPrefs.GetInt("RhinoWin") == 1 && PlayerPrefs.GetInt("MonkeyWin") == 1 && PlayerPrefs.GetInt("CheetahWin") == 1)
         {
-            gate1.GetComponent<Renderer>().material = completed;
-            gate2.GetComponent<Renderer>().material = completed;
-            gate3.GetComponent<Renderer>().material = completed;
+            StartCoroutine(CompleteHub());
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator CompleteHub()
     {
+        yield return new WaitForSeconds(2f);
         
     }
 }
