@@ -23075,6 +23075,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -4.816
       objectReference: {fileID: 0}
+    - target: {fileID: -4058193728001364438, guid: db28f1a354f02f4408def287453b26ce, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d6aa2e888b79ea4ea7153533cd49160, type: 2}
     - target: {fileID: -3256477391515123359, guid: db28f1a354f02f4408def287453b26ce, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.01
@@ -23115,6 +23119,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 350.565
       objectReference: {fileID: 0}
+    - target: {fileID: -2479673639765776216, guid: db28f1a354f02f4408def287453b26ce, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d6aa2e888b79ea4ea7153533cd49160, type: 2}
+    - target: {fileID: -2283423840375574266, guid: db28f1a354f02f4408def287453b26ce, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d6aa2e888b79ea4ea7153533cd49160, type: 2}
     - target: {fileID: -2198888584636164399, guid: db28f1a354f02f4408def287453b26ce, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.14
@@ -23155,6 +23167,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -4.722
       objectReference: {fileID: 0}
+    - target: {fileID: -1385328259773319019, guid: db28f1a354f02f4408def287453b26ce, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d6aa2e888b79ea4ea7153533cd49160, type: 2}
     - target: {fileID: -1330824126050187718, guid: db28f1a354f02f4408def287453b26ce, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.34
@@ -23195,6 +23211,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -192.718
       objectReference: {fileID: 0}
+    - target: {fileID: -1206874426333947015, guid: db28f1a354f02f4408def287453b26ce, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d6aa2e888b79ea4ea7153533cd49160, type: 2}
+    - target: {fileID: 673623863570565911, guid: db28f1a354f02f4408def287453b26ce, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d6aa2e888b79ea4ea7153533cd49160, type: 2}
     - target: {fileID: 919132149155446097, guid: db28f1a354f02f4408def287453b26ce, type: 3}
       propertyPath: m_Name
       value: Balloon_Dog_Animations
@@ -23243,6 +23267,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 274.018
       objectReference: {fileID: 0}
+    - target: {fileID: 2236237030686087061, guid: db28f1a354f02f4408def287453b26ce, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d6aa2e888b79ea4ea7153533cd49160, type: 2}
     - target: {fileID: 5328482478806888397, guid: db28f1a354f02f4408def287453b26ce, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.19
@@ -23403,6 +23431,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -4.722
       objectReference: {fileID: 0}
+    - target: {fileID: 7253260516435870914, guid: db28f1a354f02f4408def287453b26ce, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d6aa2e888b79ea4ea7153533cd49160, type: 2}
+    - target: {fileID: 8630922443590134764, guid: db28f1a354f02f4408def287453b26ce, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d6aa2e888b79ea4ea7153533cd49160, type: 2}
     - target: {fileID: 8715409198613739906, guid: db28f1a354f02f4408def287453b26ce, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.02
