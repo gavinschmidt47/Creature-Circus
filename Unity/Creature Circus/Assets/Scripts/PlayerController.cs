@@ -149,38 +149,43 @@ public class PlayerController : MonoBehaviour
        
         // Apply input
         controller.Move(targetVel);
+        if (controller.isGrounded)
+        {
+            myAnimator.SetBool("IsJumping", false);
+        }
     }
 
     //Called from Player Input
     public void Jump(InputAction.CallbackContext context)
     {
-        //Checks if button is being held
         if (context.started)
         {
             buttonHeld = true;
-            //Play sound
             jumpSound.PlayOneShot(jumpSound.clip);
         }
         else if (context.canceled)
         {
             buttonHeld = false;
-            doubleJump = false; 
+            doubleJump = false;
+
+            myAnimator.SetBool("IsJumping", false);
         }
 
-        //Gets rid of 2/3 button contexts
         if (!context.started) return;
 
-        //Checks if controller is on the ground or if its used double jump
         if (controller.isGrounded)
         {
             upVel = playerJump;
-            doubleJump = false; // Reset double jump when grounded
+            doubleJump = false;
+
+            myAnimator.SetBool("IsJumping", true);
         }
         else if (!doubleJump)
         {
-            //Apply long jump
             StartCoroutine(HeldJump());
             doubleJump = true;
+
+            myAnimator.SetBool("IsJumping", true);
         }
     }
 
@@ -248,12 +253,12 @@ public class PlayerController : MonoBehaviour
     public void Attack(InputAction.CallbackContext context)
     {
         if (!context.started) return;
-        StartCoroutine(inAttack(attackBox));
+        StartCoroutine(InAttack(attackBox));
         //Play sound
         hitSound.PlayOneShot(hitSound.clip);
     }
 
-    private IEnumerator inAttack(GameObject box)
+    private IEnumerator InAttack(GameObject box)
     {
         box.SetActive(true);
         yield return new WaitForSeconds(0.5f);
