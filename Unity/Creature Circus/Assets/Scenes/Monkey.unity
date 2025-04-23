@@ -55893,38 +55893,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c239c385068d96343bb9bf3066b43162, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1442880978}
+      addedObject: {fileID: 1442880979}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c239c385068d96343bb9bf3066b43162, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1442880979}
+      addedObject: {fileID: 1442880980}
   m_SourcePrefab: {fileID: 100100000, guid: c239c385068d96343bb9bf3066b43162, type: 3}
 --- !u!1 &1442880973 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c239c385068d96343bb9bf3066b43162, type: 3}
   m_PrefabInstance: {fileID: 1442880972}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1442880978
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1442880973}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8fe121830c0718b43acb620b52cff964, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &1442880979
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -55946,6 +55924,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.05094405, y: 0.012723996, z: 0.020333694}
   m_Center: {x: 0.00012354531, y: 0.0017604595, z: 0.00064308423}
+--- !u!111 &1442880980
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442880973}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: cc15d9ba2b33a254fbcc45a8ea449a18, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: cc15d9ba2b33a254fbcc45a8ea449a18, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1001 &1450365948
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -68029,9 +68024,9 @@ MonoBehaviour:
         z: 12.370307
       Rotation:
         value:
-          x: 0.09756943
-          y: 0.9364478
-          z: -0.2594816
+          x: 0.09756944
+          y: 0.93644774
+          z: -0.25948155
           w: -0.21497697
     - Position:
         x: -7.5
@@ -68047,10 +68042,10 @@ MonoBehaviour:
         z: 9.864804
       Rotation:
         value:
-          x: -0.08433451
-          y: 0.93098587
-          z: -0.2620229
-          w: 0.23978537
+          x: -0.084334515
+          y: 0.9309858
+          z: -0.26202297
+          w: 0.23978542
     - Position:
         x: 4.5
         y: 7.9
@@ -69042,7 +69037,7 @@ GameObject:
   - component: {fileID: 2136101189}
   - component: {fileID: 2136101188}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: NavMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
