@@ -17,6 +17,7 @@ TagManager:
   - Lose
   - Jump
   - SpeedEnemy
+  - Ticket
   layers:
   - Default
   - TransparentFX

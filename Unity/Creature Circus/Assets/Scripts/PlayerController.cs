@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour
     public AudioSource hitSound;
     [Tooltip("Audio source for the jump sound")]
     public AudioSource jumpSound;
+    [Tooltip("Audio source for ticket sound")]
+    public AudioSource ticketSound;
     [Tooltip("Bounce multiplier for the jump pad")]
     public float bounceMultiplier = 1.5f;
     
@@ -38,6 +41,7 @@ public class PlayerController : MonoBehaviour
     internal bool infStam;
     internal bool paused;
     internal bool gameOver;
+    private int tickets = 0;
     
 
     //Input
@@ -66,6 +70,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("UI for cheats")]
     public GameObject infStaminaUI;
     public GameObject invincibleUI;
+    public TextMeshProUGUI ticketText;
 
     void OnEnable()
     {
@@ -245,6 +250,13 @@ public class PlayerController : MonoBehaviour
             upVel = playerJump * bounceMultiplier;
             //Play sound
             jumpSound.PlayOneShot(jumpSound.clip);
+        }
+        else if (hit.gameObject.CompareTag("Ticket"))
+        {
+            tickets++;
+            ticketSound.PlayOneShot(ticketSound.clip);
+            Destroy(hit.gameObject);
+            ticketText.text = "Tickets: " + tickets;
         }
         
     }

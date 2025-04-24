@@ -7,6 +7,8 @@ public class MonkeyController : MonoBehaviour
 {
     public CharacterController controller;
     public PlayerController playerController;
+    public GameObject cam;
+    public GameObject climbCam;
     public float climbSpeed = 3.0f;
     public float jumpForce = 10.0f;
 
@@ -14,6 +16,12 @@ public class MonkeyController : MonoBehaviour
     private bool XYClimb = false;
     private bool YZClimb = false;
     private Vector3 wallLocation;
+    private bool camAnim = false;
+
+    void Start()
+    {
+        StartCoroutine(CamAnim());
+    }
 
     void Update()
     {
@@ -21,6 +29,9 @@ public class MonkeyController : MonoBehaviour
         {
             //Disables player movement
             playerController.enabled = false;
+
+            climbCam.SetActive(true);
+            cam.SetActive(false);
 
             //Climbs the wall
             Climb();
@@ -36,6 +47,12 @@ public class MonkeyController : MonoBehaviour
         {
             //Re-enables player movement
             playerController.enabled = true;
+
+            if (!camAnim)
+            {
+                climbCam.SetActive(false);
+                cam.SetActive(true);
+            }
         }
     }
 
@@ -103,6 +120,16 @@ public class MonkeyController : MonoBehaviour
 
         //Resets climbing
         isClimbing = false;
+    }
+
+    private IEnumerator CamAnim()
+    {
+        camAnim = true;
+        //Waits for the camera to be set up
+        cam.SetActive(false);
+        yield return new WaitForSeconds(playerController.camAnimTime + 0.01f);
+        cam.SetActive(true);
+        camAnim = false;
     }
 }
 
