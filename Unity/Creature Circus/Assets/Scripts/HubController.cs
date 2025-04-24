@@ -26,7 +26,11 @@ public class HubController : MonoBehaviour
     public float firstWaitTime = 2f;
     public float secondWaitTime = 2f;   
     public float thirdWaitTime = 2f;
+    public float camWaitTime;
 
+    [Header("Camera")]
+    [Tooltip("Camera object")]
+    public GameObject cam;
     private int levelsCompleted;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -52,6 +56,15 @@ public class HubController : MonoBehaviour
         {
             StartCoroutine(CompleteHub());
         }
+
+        StartCoroutine(CamAnim());
+    }
+
+    private IEnumerator CamAnim()
+    {
+        cam.SetActive(false);
+        yield return new WaitForSeconds(camWaitTime);
+        cam.SetActive(true);
     }
 
     private IEnumerator CompleteHub()

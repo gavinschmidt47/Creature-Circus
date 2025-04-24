@@ -1023,12 +1023,14 @@ MonoBehaviour:
   attackBox: {fileID: 408955557}
   hitSound: {fileID: 119513425}
   jumpSound: {fileID: 119513424}
+  ticketSound: {fileID: 0}
   bounceMultiplier: 1.5
   inputs: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   myAnimator: {fileID: 119513422}
   camAnimTime: 15
   infStaminaUI: {fileID: 0}
   invincibleUI: {fileID: 0}
+  ticketText: {fileID: 0}
 --- !u!1 &154928218
 GameObject:
   m_ObjectHideFlags: 0
@@ -24863,6 +24865,8 @@ MonoBehaviour:
   firstWaitTime: 1.8
   secondWaitTime: 1.8
   thirdWaitTime: 2
+  camWaitTime: 15
+  cam: {fileID: 1749195615}
 --- !u!1 &2135049882
 GameObject:
   m_ObjectHideFlags: 0
