@@ -35,6 +35,7 @@ public class CheetahController : MonoBehaviour
     private bool doubleJump;
     private bool buttonHeld;
     internal bool invincible;
+    internal bool autoHit;
     private float boost;
     private float currSpeed;
     private bool grounded;
@@ -61,6 +62,7 @@ public class CheetahController : MonoBehaviour
 
     // UI
     public GameObject invincibleUI;
+        public GameObject autoHitUI;
     public TextMeshProUGUI speedText;
     
 
@@ -83,8 +85,15 @@ public class CheetahController : MonoBehaviour
         currSpeed = 0;
 
         invincible = false;
+        autoHit = false;
         
         StartCoroutine(CamAnim());
+    }
+
+    void Update() {
+        if (autoHit == true) {
+            attackBox.SetActive(true);
+        };
     }
 
     //Fixed update for physics regulation
@@ -264,6 +273,24 @@ public class CheetahController : MonoBehaviour
 
             // Set the invincible UI to inactive
             invincibleUI.SetActive(false);
+        }
+    }
+
+    public void AutoHitting(bool aut)
+    {
+        if (aut)
+        {
+            autoHit = true;
+
+            // Set the auto hit UI to active
+            autoHitUI.SetActive(true);
+        }
+        else
+        {
+            autoHit = false;
+
+            // Set the Auto HIT UI to inactive
+            autoHitUI.SetActive(false);
         }
     }
 

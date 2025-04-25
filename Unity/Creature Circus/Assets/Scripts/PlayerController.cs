@@ -328,7 +328,7 @@ public class PlayerController : MonoBehaviour
         {
             autoHit = true;
 
-            // Set the invincible UI to active
+            // Set the auto hit UI to active
             autoHitUI.SetActive(true);
         }
         else

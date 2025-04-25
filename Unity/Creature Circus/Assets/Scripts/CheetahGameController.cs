@@ -26,7 +26,7 @@ public class CheetahGameController : MonoBehaviour
     public GameObject losePanel;
     public Toggle invT;
     public Toggle infT;
-
+        public Toggle autT;
 
     //Misc.
     private string sceneName;
@@ -78,6 +78,7 @@ public class CheetahGameController : MonoBehaviour
 
                 //Set toggles
                 invT.isOn = player.invincible;
+                autT.isOn = player.autoHit;
 
                 player.enabled = false;
             }
