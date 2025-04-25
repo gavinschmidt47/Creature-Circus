@@ -32903,6 +32903,8 @@ MonoBehaviour:
   infT: {fileID: 0}
   autT: {fileID: 0}
   timeText: {fileID: 0}
+  winSound: {fileID: 0}
+  loseSound: {fileID: 0}
 --- !u!114 &2091867632
 MonoBehaviour:
   m_ObjectHideFlags: 0

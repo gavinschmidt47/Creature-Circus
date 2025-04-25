@@ -29,6 +29,9 @@ public class CheetahGameController : MonoBehaviour
         public Toggle autT;
 
     //Misc.
+    public AudioSource winSound;
+    public AudioSource loseSound;
+
     private string sceneName;
 
     
@@ -140,6 +143,7 @@ public class CheetahGameController : MonoBehaviour
             PlayerPrefs.SetInt("CheetahWin", 1); // Mark the game as won (1 for true)
             PlayerPrefs.Save(); // Save the changes
         }
+        winSound.PlayOneShot(winSound.clip);
     }
 
     public void LoseGame()
@@ -151,6 +155,8 @@ public class CheetahGameController : MonoBehaviour
         Cursor.visible = true;
         losePanel.SetActive(true);
         player.gameObject.SetActive(false);
+
+        loseSound.PlayOneShot(loseSound.clip);
     }
 
     public void ReCheetah()

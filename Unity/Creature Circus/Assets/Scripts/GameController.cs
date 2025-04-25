@@ -28,6 +28,8 @@ public class GameController : MonoBehaviour
     public Toggle infT;
     public Toggle autT;
     public TextMeshProUGUI timeText;
+    public AudioSource winSound;
+    public AudioSource loseSound;
 
     private float timeLeft = 60f;
 
@@ -174,6 +176,7 @@ public class GameController : MonoBehaviour
             PlayerPrefs.SetInt("MonkeyWin", 1);
             PlayerPrefs.Save();
         }
+        winSound.PlayOneShot(winSound.clip);
     }
 
     public void LoseGame()
@@ -185,6 +188,8 @@ public class GameController : MonoBehaviour
         Cursor.visible = true;
         losePanel.SetActive(true);
         player.gameObject.SetActive(false);
+        
+        loseSound.PlayOneShot(loseSound.clip);
     }
 
     public void ReRhino()

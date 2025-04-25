@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour
     public AudioSource ticketSound;
     [Tooltip("Bounce multiplier for the jump pad")]
     public float bounceMultiplier = 1.5f;
-    
+
+
     private float upVel;
     private Vector2 inVel;
     private Vector3 targetVel;

@@ -45,6 +45,7 @@ public class RhinoController : MonoBehaviour
     private CharacterController controller;
 
     //Misc.
+    public GameObject chargeParticles;
     private Coroutine chargeCoroutine;
 
     void Start()
@@ -112,6 +113,7 @@ public class RhinoController : MonoBehaviour
             //Stops the charge
             charging = false;
             StopCoroutine(chargeCoroutine);
+            chargeParticles.SetActive(false);
             followCam.SetActive(true);
             chargeCam.SetActive(false);
 
@@ -126,6 +128,7 @@ public class RhinoController : MonoBehaviour
     {
         //Disable playercontrols
         playerController.enabled = false;
+        chargeParticles.SetActive(true);
 
         while ((charging && charge > 0) || playerController.infStam)
         {
@@ -142,11 +145,14 @@ public class RhinoController : MonoBehaviour
         followCam.SetActive(true);
         chargeCam.SetActive(false);
 
+        chargeParticles.SetActive(false);
+
         //Re-enable playercontrols  
         playerController.enabled = true;
 
         //Reset charging
         charging = false;
+
     }
 
     private void OnControllerColliderHit(ControllerColliderHit other) {
