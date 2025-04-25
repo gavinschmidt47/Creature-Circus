@@ -32,6 +32,12 @@ public class HubController : MonoBehaviour
     [Tooltip("Camera object")]
     public GameObject cam;
     private int levelsCompleted;
+
+    //End Game
+    [Header("End Game")]
+    public GameObject endGameObject;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -78,5 +84,7 @@ public class HubController : MonoBehaviour
         yield return new WaitForSeconds(thirdWaitTime);
         gate1.GetComponent<Renderer>().material = completed;
         gate1Particles.SetActive(true);
+
+        endGameObject.SetActive(true);
     }
 }

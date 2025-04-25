@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
     public GameObject invincibleUI;
     public GameObject autoHitUI;
     public TextMeshProUGUI ticketText;
+    public GameObject endGameUI;
 
     void OnEnable()
     {
@@ -266,7 +267,11 @@ public class PlayerController : MonoBehaviour
             Destroy(hit.gameObject);
             ticketText.text = "Tickets: " + tickets;
         }
-        
+        else if (hit.gameObject.CompareTag("EndGame"))
+        {
+            endGameUI.SetActive(true);
+            gameOver = true;
+        }
     }
 
     //Called from PlayerInput

@@ -18,6 +18,7 @@ TagManager:
   - Jump
   - SpeedEnemy
   - Ticket
+  - EndGame
   layers:
   - Default
   - TransparentFX
