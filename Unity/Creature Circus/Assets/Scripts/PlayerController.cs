@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     private float boost;
     internal bool invincible;
     internal bool infStam;
+    internal bool autoHit;
     internal bool paused;
     internal bool gameOver;
     private int tickets = 0;
@@ -70,6 +71,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("UI for cheats")]
     public GameObject infStaminaUI;
     public GameObject invincibleUI;
+    public GameObject autoHitUI;
     public TextMeshProUGUI ticketText;
 
     void OnEnable()
@@ -109,6 +111,7 @@ public class PlayerController : MonoBehaviour
         buttonHeld = false;
         invincible = false;
         infStam = false;
+        autoHit = false;
         paused = false;
         gameOver = false;
 
@@ -124,6 +127,10 @@ public class PlayerController : MonoBehaviour
         //Look around
         Vector2 lookDir = look.ReadValue<Vector2>();
         transform.Rotate(0, lookDir.x, 0);
+
+        if (autoHit == true) {
+            attackBox.SetActive(true);
+        };
     }
 
     //Fixed update for physics regulation
@@ -312,6 +319,24 @@ public class PlayerController : MonoBehaviour
 
             // Set the invincible UI to inactive
             invincibleUI.SetActive(false);
+        }
+    }
+
+     public void AutoHitting(bool aut)
+    {
+        if (aut)
+        {
+            autoHit = true;
+
+            // Set the invincible UI to active
+            autoHitUI.SetActive(true);
+        }
+        else
+        {
+            autoHit = false;
+
+            // Set the Auto HIT UI to inactive
+            autoHitUI.SetActive(false);
         }
     }
 }

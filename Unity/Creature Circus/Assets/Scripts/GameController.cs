@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
     public GameObject losePanel;
     public Toggle invT;
     public Toggle infT;
+    public Toggle autT;
     public TextMeshProUGUI timeText;
 
     private float timeLeft = 60f;
@@ -85,6 +86,7 @@ public class GameController : MonoBehaviour
                 //Set toggles
                 invT.isOn = player.invincible;
                 infT.isOn = player.infStam;
+                autT.isOn = player.autoHit;
 
                 //Disable Player
                 player.enabled = false;
