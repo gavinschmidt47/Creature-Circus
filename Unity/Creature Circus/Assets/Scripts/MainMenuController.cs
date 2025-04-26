@@ -25,15 +25,17 @@ public class MainMenuController : MonoBehaviour
 
     public void Options()
     {
-        // Load the options scene or show options menu
-        Debug.Log("Options menu is not implemented yet.");
+        //Load the options menu
+        mainMenuPanel.SetActive(false);
+        optionsPanel.SetActive(true);
+        aboutPanel.SetActive(false);
     }
 
     public void About()
     {
         //Load the about menu
         mainMenuPanel.SetActive(false);
-        //optionsPanel.SetActive(false);
+        optionsPanel.SetActive(false);
         aboutPanel.SetActive(true);
     }
 
@@ -48,7 +50,7 @@ public class MainMenuController : MonoBehaviour
     {
         // Return to the main menu
         mainMenuPanel.SetActive(true);
-        //optionsPanel.SetActive(false);
+        optionsPanel.SetActive(false);
         aboutPanel.SetActive(false);
     }
 }
