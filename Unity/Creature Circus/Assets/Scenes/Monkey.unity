@@ -35383,6 +35383,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 502375705}
+        m_TargetAssemblyTypeName: MonkeyController, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f1ba0d36-48eb-4cd5-b651-1c94a6531f70
     m_ActionName: 'Player/Jump[/Keyboard/space]'
   - m_PersistentCalls:
@@ -103227,9 +103239,9 @@ MonoBehaviour:
         z: 12.370307
       Rotation:
         value:
-          x: 0.09756944
-          y: 0.93644774
-          z: -0.25948155
+          x: 0.09756943
+          y: 0.9364478
+          z: -0.2594816
           w: -0.21497697
     - Position:
         x: -7.5
@@ -103245,10 +103257,10 @@ MonoBehaviour:
         z: 9.864804
       Rotation:
         value:
-          x: -0.084334515
-          y: 0.9309858
-          z: -0.26202297
-          w: 0.23978542
+          x: -0.08433451
+          y: 0.93098587
+          z: -0.2620229
+          w: 0.23978537
     - Position:
         x: 4.5
         y: 7.9

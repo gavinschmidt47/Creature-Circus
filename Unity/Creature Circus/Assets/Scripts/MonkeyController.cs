@@ -24,13 +24,6 @@ public class MonkeyController : MonoBehaviour
 
             //Climbs the wall
             Climb();
-
-            //Checks for jump input
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                //Moves the character away from the wall
-                StartCoroutine(JumpAway(transform.position - wallLocation));
-            }
         }
         else
         {
@@ -77,6 +70,15 @@ public class MonkeyController : MonoBehaviour
     {
         //Moves characterm up the wall
         controller.Move(Vector3.up * climbSpeed * Time.deltaTime);
+    }
+
+    public void Jump (InputAction.CallbackContext context)
+    {
+        if (context.performed && isClimbing)
+        {
+            //Moves the character away from the wall
+            StartCoroutine(JumpAway(transform.position - wallLocation));
+        }
     }
 
     IEnumerator JumpAway(Vector3 wallDirection)
